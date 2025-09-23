@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  generations Generation[]
+  products    Product[]
+  domains     Domain[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  description String
+  data        String   // JSON string with full product data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  generations Generation[]
+
+  @@map("products")
+}
+
+model Domain {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  title       String
+  concept     String
+  data        String   // JSON string with full domain data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  generationDomains GenerationDomain[]
+
+  @@map("domains")
+}
+
+model Generation {
+  id            String            @id @default(cuid())
+  name          String
+  status        GenerationStatus  @default(CREATED)
+  userInput     String?           // Optional user input for customization
+  scenario      String?           // Generated scenario text
+  timing        String?           // Timing breakdown
+  prompts       String?           // JSON array of VEO3 prompts
+  videoFiles    String?           // JSON array of video file paths
+  finalVideo    String?           // Path to final concatenated video
+  enhancedVideo String?           // Path to audio-enhanced video
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  domains GenerationDomain[]
+  logs    GenerationLog[]
+
+  @@map("generations")
+}
+
+model GenerationDomain {
+  id           String @id @default(cuid())
+  generationId String
+  domainId     String
+
+  generation Generation @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  domain     Domain     @relation(fields: [domainId], references: [id], onDelete: Cascade)
+
+  @@unique([generationId, domainId])
+  @@map("generation_domains")
+}
+
+model GenerationLog {
+  id           String   @id @default(cuid())
+  message      String
+  level        LogLevel @default(INFO)
+  createdAt    DateTime @default(now())
+  generationId String
+
+  generation Generation @relation(fields: [generationId], references: [id], onDelete: Cascade)
+
+  @@map("generation_logs")
+}
+
+enum GenerationStatus {
+  CREATED
+  GENERATING_SCENARIO
+  GENERATING_TIMING
+  GENERATING_PROMPTS
+  GENERATING_VIDEOS
+  CONCATENATING
+  ENHANCING_AUDIO
+  COMPLETED
+  FAILED
+}
+
+enum LogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+}

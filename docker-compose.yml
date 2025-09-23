@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  crossfi-video-generator:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:./dev.db
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=crossfi-video-generator-secret-2025
+    env_file:
+      - .env
+    volumes:
+      - ./raw_video:/app/raw_video
+      - ./ready_video:/app/ready_video
+      - ./prisma/dev.db:/app/prisma/dev.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,11 @@
+# AI и ML библиотеки
+anthropic==0.40.0
+fal-client==0.4.1
+
+# Обработка видео
+moviepy==1.0.3
+
+# Общие библиотеки
+requests==2.31.0
+python-dotenv==1.0.0
+pathlib2==2.3.7
