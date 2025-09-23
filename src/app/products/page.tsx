@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Navbar from '@/components/layout/navbar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Plus, Package, RefreshCw } from 'lucide-react'
+import { Plus, Package, RefreshCw, Archive, Edit } from 'lucide-react'
 
 interface Product {
   id: string
@@ -19,6 +20,7 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [seeding, setSeeding] = useState(false)
+  const [archiving, setArchiving] = useState<string | null>(null)
 
   const loadProducts = async () => {
     try {
@@ -50,6 +52,26 @@ export default function ProductsPage() {
     }
   }
 
+  const archiveProduct = async (productId: string) => {
+    if (!confirm('Вы уверены, что хотите архивировать этот продукт?')) {
+      return
+    }
+
+    setArchiving(productId)
+    try {
+      const response = await fetch(`/api/products/${productId}/archive`, {
+        method: 'POST'
+      })
+      if (response.ok) {
+        await loadProducts()
+      }
+    } catch (error) {
+      console.error('Error archiving product:', error)
+    } finally {
+      setArchiving(null)
+    }
+  }
+
   useEffect(() => {
     loadProducts()
   }, [])
@@ -78,10 +100,12 @@ export default function ProductsPage() {
         </div>
 
         <div className="mb-6 flex space-x-4">
-          <Button size="lg" className="flex items-center space-x-2">
-            <Plus className="h-5 w-5" />
-            <span>Создать продукт</span>
-          </Button>
+          <Link href="/products/create">
+            <Button size="lg" className="flex items-center space-x-2">
+              <Plus className="h-5 w-5" />
+              <span>Создать продукт</span>
+            </Button>
+          </Link>
           
           {products.length === 0 && (
             <Button 
@@ -145,11 +169,21 @@ export default function ProductsPage() {
                     )}
                     
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="flex-1">
-                        Редактировать
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        Подробнее
+                      <Link href={`/products/${product.id}/edit`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full flex items-center space-x-1">
+                          <Edit className="h-3 w-3" />
+                          <span>Редактировать</span>
+                        </Button>
+                      </Link>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => archiveProduct(product.id)}
+                        disabled={archiving === product.id}
+                        className="flex items-center space-x-1"
+                      >
+                        <Archive className="h-3 w-3" />
+                        <span>{archiving === product.id ? '...' : 'Архив'}</span>
                       </Button>
                     </div>
                   </CardContent>

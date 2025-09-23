@@ -41,21 +41,31 @@ export async function GET(
       )
     }
 
-    // Читаем файл
-    const fileBuffer = fs.readFileSync(videoPath)
-    const fileName = `${generation.name}_segment_${index + 1}.mp4`
+    // Читаем файл как поток
+    const fileStats = fs.statSync(videoPath)
+    const fileStream = fs.createReadStream(videoPath)
+    
+    // Конвертируем поток в буфер
+    const chunks: Buffer[] = []
+    for await (const chunk of fileStream) {
+      chunks.push(chunk)
+    }
+    const fileBuffer = Buffer.concat(chunks)
+    
+    const fileName = `generation_${generation.id}_segment_${index + 1}.mp4`
     
     // Возвращаем файл
     const headers: Record<string, string> = {
       'Content-Type': 'video/mp4',
-      'Content-Length': fileBuffer.length.toString(),
+      'Content-Length': fileStats.size.toString(),
+      'Accept-Ranges': 'bytes',
     }
 
     if (download) {
       headers['Content-Disposition'] = `attachment; filename="${fileName}"`
     }
 
-    return new NextResponse(fileBuffer, { headers })
+    return new Response(fileBuffer, { headers })
 
   } catch (error) {
     console.error('Error serving video segment:', error)

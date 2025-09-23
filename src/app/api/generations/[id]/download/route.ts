@@ -28,10 +28,10 @@ export async function GET(
 
     if (type === 'enhanced' && generation.enhancedVideo) {
       videoPath = generation.enhancedVideo
-      fileName = `${generation.name}_enhanced.mp4`
+      fileName = `generation_${generation.id}_enhanced.mp4`
     } else if (generation.finalVideo) {
       videoPath = generation.finalVideo
-      fileName = `${generation.name}_final.mp4`
+      fileName = `generation_${generation.id}_final.mp4`
     }
 
     if (!videoPath || !fs.existsSync(videoPath)) {
@@ -41,15 +41,24 @@ export async function GET(
       )
     }
 
-    // Читаем файл
-    const fileBuffer = fs.readFileSync(videoPath)
+    // Читаем файл как поток
+    const fileStats = fs.statSync(videoPath)
+    const fileStream = fs.createReadStream(videoPath)
     
-    // Возвращаем файл
-    return new NextResponse(fileBuffer, {
+    // Конвертируем поток в буфер
+    const chunks: Buffer[] = []
+    for await (const chunk of fileStream) {
+      chunks.push(chunk)
+    }
+    const fileBuffer = Buffer.concat(chunks)
+    
+    // Возвращаем файл с правильными заголовками
+    return new Response(fileBuffer, {
       headers: {
         'Content-Type': 'video/mp4',
         'Content-Disposition': `attachment; filename="${fileName}"`,
-        'Content-Length': fileBuffer.length.toString(),
+        'Content-Length': fileStats.size.toString(),
+        'Accept-Ranges': 'bytes',
       },
     })
 

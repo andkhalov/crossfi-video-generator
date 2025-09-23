@@ -17,6 +17,7 @@ import re
 from anthropic import Anthropic
 import fal_client
 from moviepy.editor import VideoFileClip, concatenate_videoclips
+from prompt_builder import PromptBuilder
 
 class VideoGenerationPipeline:
     def __init__(self, api_keys: Dict[str, str], schema_dir: str = "../schema", domains_file: str = "../domains_v6.json"):
@@ -109,7 +110,7 @@ class VideoGenerationPipeline:
                 else:
                     raise Exception(f"Claude API error: {str(e)}")
 
-    def generate_scenario(self, domain_key: str, product_data: Dict[str, Any], user_input: str = "") -> str:
+    def generate_scenario(self, domain_key: str, product_data: Dict[str, Any], user_input: str = "", language: str = "Portuguese") -> str:
         """Генерация сценария для видео"""
         if domain_key not in self.domains:
             raise ValueError(f"Domain '{domain_key}' not found")
@@ -117,12 +118,13 @@ class VideoGenerationPipeline:
         domain = self.domains[domain_key]
         domain_description = self._format_domain_description(domain)
         
-        scenario_prompt = self.prompts["scenario_creation"].format(
-            domain_description=domain_description
+        # Используем новый PromptBuilder вместо XML
+        prompt_builder = PromptBuilder(language)
+        scenario_prompt = prompt_builder.build_scenario_prompt(
+            domain_description, 
+            product_data, 
+            user_input
         )
-        
-        if user_input:
-            scenario_prompt += f"\n\nДополнительные требования пользователя: {user_input}"
         
         return self._call_claude(scenario_prompt, max_tokens=3000)
 
@@ -140,7 +142,7 @@ class VideoGenerationPipeline:
         """.strip()
         return description
 
-    def determine_timing(self, scenario: str, domain_key: str) -> tuple:
+    def determine_timing(self, scenario: str, domain_key: str, language: str = "Portuguese") -> tuple:
         """Определение тайминга видео с вероятностным распределением"""
         domain = self.domains.get(domain_key, {})
         base_probs = domain.get('length', [0.6, 0.3, 0.1])  # [8s, 16s, 24s]
@@ -191,12 +193,9 @@ class VideoGenerationPipeline:
         duration_options = [8, 16, 24]
         selected_duration = random.choices(duration_options, weights=adjusted_probs, k=1)[0]
 
-        # Получение детального разбора от Claude
-        timing_prompt = self.prompts["timing_decision"].format(
-            scenario=scenario,
-            selected_duration=selected_duration,
-            domain_key=domain_key
-        )
+        # Используем новый PromptBuilder для тайминга
+        prompt_builder = PromptBuilder(language)
+        timing_prompt = prompt_builder.build_timing_prompt(scenario, domain_key, selected_duration)
         
         timing_response = self._call_claude(timing_prompt, max_tokens=2500)
         timing_breakdown = self._extract_timing_breakdown(timing_response)
@@ -234,24 +233,17 @@ class VideoGenerationPipeline:
         return "CrossFi adoption story showcasing financial transformation"
 
     def generate_veo3_prompts(self, scenario: str, timing: int, timing_breakdown: str, 
-                             framing_context: str, domain_key: str) -> List[Dict[str, Any]]:
+                             framing_context: str, domain_key: str, language: str = "Portuguese") -> List[Dict[str, Any]]:
         """Генерация промптов для VEO3"""
         camera_style = self._select_camera_style(domain_key, scenario)
         
-        consistency_templates = f"""
-**FRAME TEMPLATE:** {framing_context}
-**CHARACTER TEMPLATE:** Extracted from scenario - maintain identical descriptions
-**CAMERA STYLE:** {camera_style} - maintain throughout all segments
-**LOCATION ANCHORS:** Environmental elements for visual continuity
-**VISUAL MARKERS:** Key recognizable elements across segments
-        """.strip()
-        
-        veo3_prompt = self.prompts["veo3_generation"].format(
-            scenario=scenario,
-            timing=f"{timing} seconds",
-            timing_breakdown=timing_breakdown,
-            consistency_templates=consistency_templates,
-            camera_style=camera_style
+        # Используем новый PromptBuilder для VEO3
+        prompt_builder = PromptBuilder(language)
+        veo3_prompt = prompt_builder.build_veo3_prompt(
+            scenario, 
+            timing_breakdown, 
+            camera_style, 
+            language
         )
         
         veo3_response = self._call_claude(veo3_prompt, max_tokens=4000)
@@ -509,13 +501,14 @@ class VideoGenerationPipeline:
 def main():
     """Точка входа для CLI использования"""
     if len(sys.argv) < 4:
-        print("Usage: python video_generator.py <domain_key> <product_data_json> <generation_id> [user_input]")
+        print("Usage: python video_generator.py <domain_key> <product_data_json> <generation_id> [user_input] [language]")
         sys.exit(1)
     
     domain_key = sys.argv[1]
     product_data = json.loads(sys.argv[2])
     generation_id = sys.argv[3]
     user_input = sys.argv[4] if len(sys.argv) > 4 else ""
+    language = sys.argv[5] if len(sys.argv) > 5 else "Portuguese"
     
     # Получаем API ключи из переменных окружения
     api_keys = {
@@ -530,7 +523,7 @@ def main():
     try:
         # Генерация сценария
         print("Генерация сценария...")
-        scenario = pipeline.generate_scenario(domain_key, product_data, user_input)
+        scenario = pipeline.generate_scenario(domain_key, product_data, user_input, language)
         print(f"Сценарий создан: {len(scenario)} символов")
         
         # Выводим промежуточный результат для интерфейса
@@ -541,7 +534,7 @@ def main():
         
         # Определение тайминга
         print("Определение тайминга...")
-        duration, timing_breakdown, framing_context = pipeline.determine_timing(scenario, domain_key)
+        duration, timing_breakdown, framing_context = pipeline.determine_timing(scenario, domain_key, language)
         print(f"Выбрана длительность: {duration}s")
         
         # Выводим промежуточный результат
@@ -554,7 +547,7 @@ def main():
         
         # Генерация промптов
         print("Генерация промптов для VEO3...")
-        prompts = pipeline.generate_veo3_prompts(scenario, duration, timing_breakdown, framing_context, domain_key)
+        prompts = pipeline.generate_veo3_prompts(scenario, duration, timing_breakdown, framing_context, domain_key, language)
         print(f"Создано {len(prompts)} промптов")
         
         # Выводим промежуточный результат

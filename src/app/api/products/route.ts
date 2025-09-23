@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 export async function GET() {
   try {
     const products = await db.product.findMany({
+      where: { archived: false },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -27,6 +28,7 @@ export async function POST(request: NextRequest) {
         category,
         description,
         data: JSON.stringify(data),
+        archived: false,
         userId: 'admin', // Фиксированный пользователь
       },
     })

@@ -31,13 +31,14 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, productId, domainIds, userInput } = await request.json()
+    const { name, productId, domainIds, language, userInput } = await request.json()
 
     // Создаем генерацию
     const generation = await db.generation.create({
       data: {
         name,
         productId,
+        language: language || 'Portuguese',
         userInput: userInput || null,
         status: 'CREATED',
         userId: 'admin',

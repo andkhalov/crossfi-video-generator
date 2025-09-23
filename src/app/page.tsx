@@ -61,8 +61,11 @@ export default function HomePage() {
   useEffect(() => {
     loadGenerations()
     
-    // Автообновление каждые 10 секунд
-    const interval = setInterval(loadGenerations, 10000)
+    // Автообновление каждые 5 секунд (чаще для лучшего UX)
+    const interval = setInterval(() => {
+      console.log('Auto-refreshing generations list...')
+      loadGenerations()
+    }, 5000)
     return () => clearInterval(interval)
   }, [])
 

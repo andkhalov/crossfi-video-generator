@@ -85,6 +85,7 @@ export async function POST() {
           category: productData.category,
           description: productData.description,
           data: JSON.stringify(productData),
+          archived: false,
           userId: adminUser.id,
         }
       })

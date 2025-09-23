@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Navbar from '@/components/layout/navbar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Plus, Globe, RefreshCw, Star } from 'lucide-react'
+import { Plus, Globe, RefreshCw, Star, Archive, Edit } from 'lucide-react'
 
 interface Domain {
   id: string
@@ -19,6 +20,7 @@ export default function DomainsPage() {
   const [domains, setDomains] = useState<Domain[]>([])
   const [loading, setLoading] = useState(true)
   const [seeding, setSeeding] = useState(false)
+  const [archiving, setArchiving] = useState<string | null>(null)
 
   const loadDomains = async () => {
     try {
@@ -50,6 +52,26 @@ export default function DomainsPage() {
     }
   }
 
+  const archiveDomain = async (domainId: string) => {
+    if (!confirm('Вы уверены, что хотите архивировать этот домен?')) {
+      return
+    }
+
+    setArchiving(domainId)
+    try {
+      const response = await fetch(`/api/domains/${domainId}/archive`, {
+        method: 'POST'
+      })
+      if (response.ok) {
+        await loadDomains()
+      }
+    } catch (error) {
+      console.error('Error archiving domain:', error)
+    } finally {
+      setArchiving(null)
+    }
+  }
+
   useEffect(() => {
     loadDomains()
   }, [])
@@ -78,10 +100,12 @@ export default function DomainsPage() {
         </div>
 
         <div className="mb-6 flex space-x-4">
-          <Button size="lg" className="flex items-center space-x-2">
-            <Plus className="h-5 w-5" />
-            <span>Создать домен</span>
-          </Button>
+          <Link href="/domains/create">
+            <Button size="lg" className="flex items-center space-x-2">
+              <Plus className="h-5 w-5" />
+              <span>Создать домен</span>
+            </Button>
+          </Link>
           
           {domains.length === 0 && (
             <Button 
@@ -186,11 +210,21 @@ export default function DomainsPage() {
                     )}
                     
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" className="flex-1">
-                        Редактировать
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        Подробнее
+                      <Link href={`/domains/${domain.id}/edit`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full flex items-center space-x-1">
+                          <Edit className="h-3 w-3" />
+                          <span>Редактировать</span>
+                        </Button>
+                      </Link>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => archiveDomain(domain.id)}
+                        disabled={archiving === domain.id}
+                        className="flex items-center space-x-1"
+                      >
+                        <Archive className="h-3 w-3" />
+                        <span>{archiving === domain.id ? '...' : 'Архив'}</span>
                       </Button>
                     </div>
                   </CardContent>

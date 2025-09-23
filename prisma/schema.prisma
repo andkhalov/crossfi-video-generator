@@ -30,6 +30,7 @@ model Product {
   category    String
   description String
   data        String   // JSON string with full product data
+  archived    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -47,6 +48,7 @@ model Domain {
   title       String
   concept     String
   data        String   // JSON string with full domain data
+  archived    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -62,6 +64,7 @@ model Generation {
   id            String            @id @default(cuid())
   name          String
   status        GenerationStatus  @default(CREATED)
+  language      String?           @default("Portuguese") // Language for generation
   userInput     String?           // Optional user input for customization
   scenario      String?           // Generated scenario text
   timing        String?           // Timing breakdown

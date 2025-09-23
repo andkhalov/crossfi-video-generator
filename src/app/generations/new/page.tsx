@@ -25,13 +25,21 @@ interface Domain {
   concept: string
 }
 
+interface Language {
+  code: string
+  name: string
+  flag: string
+}
+
 export default function NewGenerationPage() {
   const [name, setName] = useState('')
   const [productId, setProductId] = useState('')
   const [selectedDomains, setSelectedDomains] = useState<string[]>([])
+  const [language, setLanguage] = useState('Portuguese')
   const [userInput, setUserInput] = useState('')
   const [products, setProducts] = useState<Product[]>([])
   const [domains, setDomains] = useState<Domain[]>([])
+  const [languages, setLanguages] = useState<Language[]>([])
   const [loading, setLoading] = useState(false)
   const [dataLoading, setDataLoading] = useState(true)
   
@@ -43,9 +51,10 @@ export default function NewGenerationPage() {
 
   const loadData = async () => {
     try {
-      const [productsRes, domainsRes] = await Promise.all([
+      const [productsRes, domainsRes, languagesRes] = await Promise.all([
         fetch('/api/products'),
-        fetch('/api/domains')
+        fetch('/api/domains'),
+        fetch('/api/languages')
       ])
       
       if (productsRes.ok) {
@@ -56,6 +65,11 @@ export default function NewGenerationPage() {
       if (domainsRes.ok) {
         const domainsData = await domainsRes.json()
         setDomains(domainsData)
+      }
+
+      if (languagesRes.ok) {
+        const languagesData = await languagesRes.json()
+        setLanguages(languagesData)
       }
     } catch (error) {
       console.error('Error loading data:', error)
@@ -94,6 +108,7 @@ export default function NewGenerationPage() {
           name,
           productId,
           domainIds: selectedDomains,
+          language,
           userInput: userInput || null,
         }),
       })
@@ -187,6 +202,26 @@ export default function NewGenerationPage() {
                     Нет доступных продуктов. <Link href="/products" className="text-blue-600 hover:underline">Создайте продукт</Link>
                   </p>
                 )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Язык генерации *
+                </label>
+                <Select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  required
+                >
+                  {languages.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
+                    </option>
+                  ))}
+                </Select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Язык для диалогов и речи в видео
+                </p>
               </div>
             </CardContent>
           </Card>

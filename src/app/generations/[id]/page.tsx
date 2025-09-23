@@ -75,13 +75,24 @@ export default function GenerationDetailsPage() {
       const response = await fetch(`/api/generations/${params.id}`)
       if (response.ok) {
         const data = await response.json()
+        console.log('Generation data loaded:', {
+          id: data.id,
+          status: data.status,
+          hasScenario: !!data.scenario,
+          hasTiming: !!data.timing,
+          hasPrompts: !!data.prompts,
+          hasVideoFiles: !!data.videoFiles,
+          hasFinalVideo: !!data.finalVideo
+        })
         setGeneration(data)
+        return data
       }
     } catch (error) {
       console.error('Error loading generation:', error)
     } finally {
       setLoading(false)
     }
+    return null
   }
 
   const startGeneration = async () => {
@@ -146,15 +157,42 @@ export default function GenerationDetailsPage() {
   useEffect(() => {
     loadGeneration()
     
-    // Автообновление для активных генераций - более частое обновление
-    const interval = setInterval(() => {
-      if (generation && !['COMPLETED', 'FAILED'].includes(generation.status)) {
-        loadGeneration()
+    // Быстрое автообновление статуса
+    const statusInterval = setInterval(async () => {
+      try {
+        const response = await fetch(`/api/generations/${params.id}/status`)
+        if (response.ok) {
+          const statusData = await response.json()
+          
+          // Если статус изменился или появились новые данные, загружаем полные данные
+          if (!generation || 
+              statusData.status !== generation.status ||
+              statusData.hasScenario !== !!generation.scenario ||
+              statusData.hasPrompts !== !!generation.prompts ||
+              statusData.hasVideoFiles !== !!generation.videoFiles ||
+              statusData.hasFinalVideo !== !!generation.finalVideo) {
+            
+            console.log('Status changed, reloading full data...')
+            await loadGeneration()
+          }
+          
+          // Останавливаем обновление если генерация завершена
+          if (['COMPLETED', 'FAILED'].includes(statusData.status)) {
+            clearInterval(statusInterval)
+          }
+        }
+      } catch (error) {
+        console.error('Error checking status:', error)
       }
-    }, 2000) // Обновляем каждые 2 секунды вместо 5
+    }, 1000) // Проверяем статус каждую секунду
 
-    return () => clearInterval(interval)
+    return () => clearInterval(statusInterval)
   }, [params.id, generation?.status])
+
+  // Отдельный эффект для первой загрузки
+  useEffect(() => {
+    loadGeneration()
+  }, [])
 
   if (loading) {
     return (

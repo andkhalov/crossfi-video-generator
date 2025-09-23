@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Video files
+raw_video/
+ready_video/
+*.mp4
+*.mov
+*.avi

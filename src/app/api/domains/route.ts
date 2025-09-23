@@ -4,6 +4,7 @@ import { db } from '@/lib/db'
 export async function GET() {
   try {
     const domains = await db.domain.findMany({
+      where: { archived: false },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -27,6 +28,7 @@ export async function POST(request: NextRequest) {
         title,
         concept,
         data: JSON.stringify(data),
+        archived: false,
         userId: 'admin',
       },
     })

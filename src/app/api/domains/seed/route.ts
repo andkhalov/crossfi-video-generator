@@ -77,6 +77,7 @@ export async function POST() {
           title: (domainData as any).title,
           concept: (domainData as any).concept,
           data: JSON.stringify(domainData),
+          archived: false,
           userId: adminUser.id,
         }
       })

@@ -62,7 +62,8 @@ export async function POST(
       domainKey,
       JSON.stringify(productData),
       generation.id,
-      generation.userInput || ''
+      generation.userInput || '',
+      generation.language || 'Portuguese'
     ], {
       env: {
         ...process.env,
@@ -79,31 +80,44 @@ export async function POST(
       // Проверяем на промежуточные результаты
       if (output.includes('INTERMEDIATE_RESULT:')) {
         try {
-          const resultJson = output.split('INTERMEDIATE_RESULT:')[1].trim()
+          const lines = output.split('\n')
+          const resultLine = lines.find(line => line.includes('INTERMEDIATE_RESULT:'))
+          if (!resultLine) return
+          
+          const resultJson = resultLine.split('INTERMEDIATE_RESULT:')[1].trim()
+          console.log('Raw intermediate result JSON:', resultJson)
           const result = JSON.parse(resultJson)
           
           // Обновляем генерацию с промежуточными результатами
           const updateData: any = {}
           
+          console.log('Processing intermediate result step:', result.step)
+          
           if (result.step === 'scenario') {
             updateData.scenario = result.scenario
             updateData.status = 'GENERATING_TIMING'
+            console.log('Scenario saved, length:', result.scenario.length)
           } else if (result.step === 'timing') {
             updateData.scenario = result.scenario
             updateData.timing = result.timing.toString()
             updateData.status = 'GENERATING_PROMPTS'
+            console.log('Timing saved:', result.timing)
           } else if (result.step === 'prompts') {
             updateData.scenario = result.scenario
             updateData.timing = result.timing.toString()
             updateData.prompts = JSON.stringify(result.prompts)
             updateData.status = 'GENERATING_VIDEOS'
+            console.log('Prompts saved, count:', result.prompts.length)
           } else if (result.step === 'videos') {
             updateData.scenario = result.scenario
             updateData.timing = result.timing.toString()
             updateData.prompts = JSON.stringify(result.prompts)
             updateData.videoFiles = JSON.stringify(result.video_segments)
             updateData.status = 'CONCATENATING'
+            console.log('Video segments saved, count:', result.video_segments.length)
           }
+          
+          console.log(`Updating generation with step: ${result.step}`, updateData)
           
           await db.generation.update({
             where: { id },
@@ -117,6 +131,8 @@ export async function POST(
               level: 'INFO',
             },
           })
+          
+          console.log(`Generation updated for step: ${result.step}`)
         } catch (error) {
           console.error('Error parsing intermediate result:', error)
         }
@@ -181,16 +197,26 @@ export async function POST(
     })
 
     pythonProcess.on('close', async (code) => {
+      console.log(`Python process finished with code: ${code}`)
+      
+      // Получаем текущее состояние генерации
+      const currentGeneration = await db.generation.findUnique({
+        where: { id }
+      })
+      
       if (code === 0) {
-        await db.generation.update({
-          where: { id },
-          data: { status: 'COMPLETED' }
-        })
+        // Если процесс завершился успешно, но статус еще не COMPLETED
+        if (currentGeneration?.status !== 'COMPLETED') {
+          await db.generation.update({
+            where: { id },
+            data: { status: 'COMPLETED' }
+          })
+        }
         
         await db.generationLog.create({
           data: {
             generationId: id,
-            message: 'Генерация завершена успешно',
+            message: 'Python процесс завершен успешно',
             level: 'INFO',
           },
         })
@@ -203,7 +229,7 @@ export async function POST(
         await db.generationLog.create({
           data: {
             generationId: id,
-            message: `Генерация завершена с ошибкой (код ${code})`,
+            message: `Python процесс завершен с ошибкой (код ${code})`,
             level: 'ERROR',
           },
         })

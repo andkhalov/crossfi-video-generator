@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { LogOut, Video, Package, Globe } from 'lucide-react'
+import { useActiveGenerations } from '@/hooks/useActiveGenerations'
 
 export default function Navbar() {
   const router = useRouter()
+  const { hasActive, activeGenerations } = useActiveGenerations()
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
@@ -26,10 +28,15 @@ export default function Navbar() {
             <div className="flex space-x-4">
               <Link 
                 href="/" 
-                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md relative"
               >
                 <Video className="h-4 w-4" />
                 <span>Генерации</span>
+                {hasActive && (
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
+                    <span className="text-xs text-white font-bold">{activeGenerations.length}</span>
+                  </div>
+                )}
               </Link>
               
               <Link 
