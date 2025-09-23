@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prompt id="veo3_generation">
+    <!-- ========== 1. META ========== -->
+    <meta>
+        <title>VEO3 Amateur-Style Video Generation for Viral CrossFi Content</title>
+        <purpose>Convert authentic scenarios into production-ready VEO3 prompts maintaining consistency and amateur aesthetics</purpose>
+        
+        <technicalSpecs>
+            <aspectRatio>9:16 (vertical mobile-first, natural for amateur recording)</aspectRatio>
+            <duration>8s per generation segment (VEO3 maximum)</duration>
+            <enhancePrompt>false (enables automatic prompt optimization)</enhancePrompt>
+            <generateAudio>true (natural ambient sound and authentic speech)</generateAudio>
+            <voiceLanguage>all dialogs, speech, any pronounced words MUST be in Brazilian Portuguese language</voiceLanguage>
+            <songLanguage>all songs, lirycs, poetry any art verbal content MUST be in Brazilian Portuguese language</songLanguage>
+        </technicalSpecs>
+
+        <consistencyFramework>
+            <identicalDescriptions>Character descriptions must be WORD-FOR-WORD identical across segments</identicalDescriptions>
+            <visualAnchors>3-5 specific visual elements that anchor scene recognition</visualAnchors>
+            <characterMarkers>2-3 distinctive but simple traits that VEO3 can maintain</characterMarkers>
+        </consistencyFramework>
+    </meta>
+
+    <!-- ========== 2. CAMERA SPECIFICATIONS ========== -->
+    <visualStyle>
+        <!-- AMATEUR / USER-GENERATED CONTENT -->
+        <amateurCameras>
+
+            <selfie>
+                <description>Front-facing phone camera, natural arm's length distance</description>
+                <technical>720p-1080p, slight digital noise, auto-exposure fluctuations</technical>
+                <movement>Natural hand shake, arm fatigue, occasional repositioning</movement>
+                <framing>Off-center, intimate distance, top of head cut off sometimes</framing>
+                <lighting>Phone screen glow, harsh shadows, overexposed backgrounds</lighting>
+                <audio>Close proximity voice, wind noise, prominent background sounds</audio>
+            </selfie>
+
+            <gopro>
+                <description>Wide-angle action camera with characteristic fisheye distortion</description>
+                <technical>Ultra-wide 170° FOV, high framerate, oversaturated colors</technical>
+                <movement>Mounted vibration or handheld energy, dynamic rapid movements</movement>
+                <framing>Everything in frame, subject small and centered, edge distortion</framing>
+                <lighting>High contrast, blown highlights, HDR-like processing</lighting>
+                <audio>Wind noise, muffled voices, action sounds, waterproof case echo</audio>
+            </gopro>
+
+            <security>
+                <description>Fixed CCTV surveillance from corner or ceiling mount</description>
+                <technical>480p-720p, compressed, low bitrate, timestamp overlay, B&W night mode</technical>
+                <movement>Completely static, no movement, fixed wide angle</movement>
+                <framing>High angle looking down, full room coverage, people appear small</framing>
+                <lighting>Harsh fluorescent, infrared night vision, grainy in low light</lighting>
+                <audio>Distant, echoing, compressed, ambient room tone only</audio>
+            </security>
+            <bodycam>
+                <description>Chest-mounted first-person perspective, law enforcement style</description>
+                <technical>1080p, wide 120° angle, auto-exposure, rolling shutter artifacts</technical>
+                <movement>Walking bounce, quick head turns, physical activity shake</movement>
+                <framing>Chest-height POV, hands entering frame, equipment visible below</framing>
+                <lighting>Auto-adjusting, flashlight beam at night, harsh contrasts</lighting>
+                <audio>Clear subject voice, radio chatter, movement sounds, breathing</audio>
+            </bodycam>
+
+            <dashcam>
+                <description>Windshield-mounted driving perspective camera</description>
+                <technical>1080p-4K, loop recording, HDR for sun/shadow transitions</technical>
+                <movement>Car vibration, road bumps, turning movements, static when parked</movement>
+                <framing>Road ahead centered, hood visible below, rearview mirror in shot</framing>
+                <lighting>Auto-exposure for varying conditions, headlights at night, reflections</lighting>
+                <audio>Engine noise, radio, in-car conversation, road sounds</audio>
+            </dashcam>
+
+            <livestream>
+                <description>Phone or webcam streaming setup, influencer style</description>
+                <technical>720p-1080p compressed, streaming artifacts, slight delay</technical>
+                <movement>Static on tripod with occasional manual adjustments</movement>
+                <framing>Centered talking head, ring light reflection in eyes, bedroom/setup visible</framing>
+                <lighting>Ring light or desk lamp, inconsistent color temperature</lighting>
+                <audio>USB mic or phone audio, room echo, keyboard clicks, notifications</audio>
+            </livestream>
+
+            <verticalPhone>
+                <description>Standard vertical phone recording, most common amateur format</description>
+                <technical>1080p-4K, vertical 9:16, digital stabilization artifacts</technical>
+                <movement>Natural handheld motion, walking shake, quick pans</movement>
+                <framing>Vertical priority, subjects cut off horizontally, casual composition</framing>
+                <lighting>Whatever's available, auto-exposure hunting, backlit situations</lighting>
+                <audio>Phone mic with wind noise, handling noise, proximity effect</audio>
+            </verticalPhone>
+        </amateurCameras>
+
+        <!-- SEMI-PROFESSIONAL / CONTENT CREATOR -->
+        <semiProCameras>
+
+            <vlogCamera>
+                <description>DSLR/mirrorless with flip screen, YouTube creator style</description>
+                <technical>4K, shallow depth of field, color graded, high bitrate</technical>
+                <movement>Gimbal stabilized or tripod, smooth planned movements</movement>
+                <framing>Rule of thirds, headroom considered, aesthetic backgrounds</framing>
+                <lighting>Natural light optimized or basic LED panel, golden hour preference</lighting>
+                <audio>Shotgun mic or lavalier, wind protection, room treatment</audio>
+            </vlogCamera>
+
+            <podcastSetup>
+                <description>Multi-camera podcast studio setup</description>
+                <technical>4K multicam, matching color profiles, wide and close angles</technical>
+                <movement>Static cameras, occasional zoom adjustments between topics</movement>
+                <framing>Two-shot wide, individual mediums, clean branded background</framing>
+                <lighting>Basic three-point lighting, colored backgrounds, LED panels</lighting>
+                <audio>Professional XLR mics, audio interface, acoustic treatment</audio>
+            </podcastSetup>
+
+            <droneFootage>
+                <description>Consumer drone aerial perspective</description>
+                <technical>4K, gimbal stabilized, LOG color profile for grading</technical>
+                <movement>Smooth reveals, orbits, crane shots, parallax movements</movement>
+                <framing>Cinematic wide landscapes, bird's eye views, dramatic reveals</framing>
+                <lighting>Natural light only, golden hour preference, long shadows</lighting>
+                <audio>Usually replaced in post, or ambient nature sounds</audio>
+            </droneFootage>
+        </semiProCameras>
+
+        <!-- PROFESSIONAL / COMMERCIAL PRODUCTION -->
+        <professionalProduction>
+
+            <commercialStudio>
+                <description>Full commercial production setup with crew</description>
+                <technical>6K-8K RAW, cinema cameras, professional codecs, LOG profiles</technical>
+                <movement>Dolly, crane, Steadicam, technocrane, precise choreographed</movement>
+                <framing>Cinematic composition, depth layers, negative space usage</framing>
+                <lighting>Full lighting grid, HMIs, LEDs, flags, silks, reflectors</lighting>
+                <audio>Boom operator, multiple wireless lavs, ADR if needed</audio>
+                <postProduction>Color grading, VFX integration, professional edit</postProduction>
+            </commercialStudio>
+
+            <tvBroadcast>
+                <description>Television studio broadcast standard</description>
+                <technical>Broadcast 1080i/4K, studio cameras on pedestals, live switching</technical>
+                <movement>Smooth pedestal moves, zoom operations, rehearsed blocking</movement>
+                <framing>Standard TV framing, lower thirds space, consistent headroom</framing>
+                <lighting>Studio grid lighting, key/fill/back standard, even coverage</lighting>
+                <audio>Broadcast mics, IFB systems, audio mixing board</audio>
+                <graphics>Real-time graphics, chyrons, branded elements</graphics>
+            </tvBroadcast>
+
+            <documentaryStyle>
+                <description>Professional documentary cinematography</description>
+                <technical>4K-6K, cinema cameras, handheld rigs, variable frame rates</technical>
+                <movement>Handheld for energy, tripod for interviews, observational style</movement>
+                <framing>Intimate close-ups, environmental wides, observational angles</framing>
+                <lighting>Available light enhanced, minimal crew, portable LED panels</lighting>
+                <audio>Boom and wireless lavs, nat sound important, minimal crew</audio>
+                <style>Cinéma vérité influence, authentic but crafted</style>
+            </documentaryStyle>
+
+            <highEndCommercial>
+                <description>Premium advertising production, Super Bowl level</description>
+                <technical>ARRI/RED cameras, anamorphic lenses, film emulation</technical>
+                <movement>Technocrane, Russian Arm, cable cam, helicopter mounts</movement>
+                <framing>Cinematic 2.39:1, dramatic compositions, luxury aesthetic</framing>
+                <lighting>Cinema lighting, HMI arrays, extensive grip equipment</lighting>
+                <audio>Full sound design, original music score, celebrity VO</audio>
+                <postProduction>Extensive VFX, Flame/Nuke compositing, cinema color grade</postProduction>
+            </highEndCommercial>
+
+            <musicVideo>
+                <description>Music video production style</description>
+                <technical>Mixed formats, high frame rates for slow-mo, unique lenses</technical>
+                <movement>Dynamic handheld, Steadicam, drone, unconventional angles</movement>
+                <framing>Wide variety, Dutch angles, extreme close-ups, visual rhythm</framing>
+                <lighting>Colored gels, strobes, practicals, atmosphere/haze</lighting>
+                <style>Genre-dependent, visual effects heavy, fast cutting</style>
+            </musicVideo>
+
+            <infomercial>
+                <description>Direct response TV commercial style</description>
+                <technical>Bright video look, multiple cameras, live-to-tape style</technical>
+                <movement>Energetic handheld, quick zooms, demonstrative angles</movement>
+                <framing>Product hero shots, before/after, demonstration angles</framing>
+                <lighting>Bright, high-key, shadowless, product photography style</lighting>
+                <audio>Enthusiastic host mic, audience reactions, upbeat music</audio>
+                <graphics>Price overlays, phone numbers, "CALL NOW!" graphics</graphics>
+            </infomercial>
+        </professionalProduction>
+
+        <!-- PRODUCTION QUALITIES -->
+        <productionQualities>
+
+            <amateur>
+                <naturalShake>Unintentional movement, human imperfection</naturalShake>
+                <casualFraming>Off-center, rule-breaking, spontaneous</casualFraming>
+                <authenticLighting>Whatever's available, no control</authenticLighting>
+                <spontaneousCapture>Unplanned, reactive, documentary</spontaneousCapture>
+                <memeWorthy>Accidentally funny, shareable, relatable</memeWorthy>
+            </amateur>
+
+            <semiPro>
+                <controlledChaos>Planned but natural-looking</controlledChaos>
+                <aestheticFraming>Conscious composition, Instagram-worthy</aestheticFraming>
+                <enhancedNatural>Available light optimized, reflectors used</enhancedNatural>
+                <editedReality>Multiple takes edited to seem spontaneous</editedReality>
+                <shareableContent>Designed for social media algorithms</shareableContent>
+            </semiPro>
+
+            <professional>
+                <precisionControl>Every element planned and executed</precisionControl>
+                <cinematicFraming>Film school rules, depth and layers</cinematicFraming>
+                <sculptedLight>Complete control of light and shadow</sculptedLight>
+                <narrativePurpose>Every shot advances story or emotion</narrativePurpose>
+                <brandAlignment>Consistent with brand guidelines</brandAlignment>
+            </professional>
+        </productionQualities>
+    </visualStyle>
+
+    <!-- ========== 3. FRAMES OPTIMISATION ========== -->
+    <framesOptimisation>
+    
+        <veo3Optimization>
+            <segmentPlanning>
+                <8secondSingle>
+                    <structure>Complete micro-story in one unbroken segment</structure>
+                    <action>Single clear action with beginning, middle, end</action>
+                    <continuity>No cuts needed - one continuous shot</continuity>
+                    <focus>One location, one angle, one key moment</focus>
+                </8secondSingle>
+
+                <16secondDouble>
+                    <structure>Two 8-second segments forming one story</structure>
+                    <breakdown>
+                        <segment1>Setup/Problem (0-8s) - establish situation</segment1>
+                        <segment2>Resolution/Payoff (8-16s) - deliver outcome</segment2>
+                    </breakdown>
+                    <transitions>
+                        <visual>Plan clear cut point - change angle by 30+ degrees</visual>
+                        <narrative>Segment 2 continues from segment 1's endpoint</narrative>
+                        <consistency>Same character, same scene, different perspective</consistency>
+                    </transitions>
+                    <action>Two-part action that naturally splits at 8-second mark</action>
+                </16secondDouble>
+
+                <24secondTriple>
+                    <structure>Three 8-second segments forming complete arc</structure>
+                    <breakdown>
+                        <segment1>Establishment (0-8s) - normal situation</segment1>
+                        <segment2>Complication (8-16s) - problem emerges</segment2>
+                        <segment3>Resolution (16-24s) - CrossFi saves the day</segment3>
+                    </breakdown>
+                    <transitions>
+                        <visual>Three distinct camera angles/positions</visual>
+                        <narrative>Each segment advances story, doesn't repeat</narrative>
+                        <progression>Wide → Medium → Close OR Static → Moving → Reaction</progression>
+                    </transitions>
+                    <action>Three-beat story that naturally breaks at 8 and 16 seconds</action>
+                </24secondTriple>
+            </segmentPlanning>
+
+            <characterConsistency>
+                <acrossSegments>
+                    <critical>EXACT same description must work for all segments</critical>
+                    <clothing>Specific outfit that won't change between cuts</clothing>
+                    <markers>2-3 distinctive features VEO3 can maintain</markers>
+                    <simplicity>Avoid complex patterns, detailed accessories</simplicity>
+                </acrossSegments>
+                <visualAnchors>
+                    <environment>Use background elements for continuity</environment>
+                    <props>Same props appear across segments</props>
+                    <lighting>Consistent lighting setup throughout</lighting>
+                </visualAnchors>
+            </characterConsistency>
+
+            <actionDesign>
+                <8secondActions>
+                    <examples>
+                        <quick>Card decline → CrossFi tap → success reaction</quick>
+                        <simple>Problem noticed → solution attempted → amazement</simple>
+                    </examples>
+                </8secondActions>
+
+                <16secondActions>
+                    <examples>
+                        <twopart>Browse shopping (8s) → Payment success (8s)</twopart>
+                        <buildup>Payment fails repeatedly (8s) → CrossFi works instantly (8s)</buildup>
+                    </examples>
+                    <splitPoint>Natural pause or transition at 8-second mark</splitPoint>
+                </16secondActions>
+
+                <24secondActions>
+                    <examples>
+                        <complete>Normal shopping (8s) → Card problems (8s) → CrossFi triumph (8s)</complete>
+                        <journey>Arrive at store (8s) → Discover issue (8s) → Resolve with CrossFi (8s)</journey>
+                    </examples>
+                    <splitPoints>Two natural transitions at 8 and 16 seconds</splitPoints>
+                </24secondActions>
+            </actionDesign>
+
+            <dialogueDistribution>
+                <8seconds>
+                    <wordCount>15-20 words maximum</wordCount>
+                    <structure>Setup (5 words) + Reaction (10 words)</structure>
+                    <pacing>Natural pauses, not rushed</pacing>
+                </8seconds>
+
+                <16seconds>
+                    <segment1>10-15 words - establish problem</segment1>
+                    <segment2>10-15 words - express resolution</segment2>
+                    <flow>Conversation continues, not restarts</flow>
+                </16seconds>
+
+                <24seconds>
+                    <segment1>8-12 words - normal conversation</segment1>
+                    <segment2>10-15 words - problem emerges</segment2>
+                    <segment3>8-12 words - amazed reaction</segment3>
+                    <arc>Building emotional intensity across segments</arc>
+                </24seconds>
+            </dialogueDistribution>
+
+            <cutPointStrategy>
+                <natural>
+                    <movement>Cut during natural action transitions</movement>
+                    <dialogue>Cut between sentences, not mid-word</dialogue>
+                    <emotional>Cut at emotional beat changes</emotional>
+                </natural>
+                <visual>
+                    <angleChange>MANDATORY: Minimum 45-degree angle change between segments</angleChange>
+                    <shotSize>MANDATORY: Must vary between wide/medium/close across segments</shotSize>
+                    <perspective>MANDATORY: Change POV or camera height between segments</perspective>
+                    <cameraPosition>CRITICAL: Each segment MUST use different camera position/mount point</cameraPosition>
+                </visual>
+                <narrative>
+                    <momentum>Each cut advances story, never repeats</momentum>
+                    <tension>Build tension across cuts</tension>
+                    <payoff>Final segment delivers maximum impact</payoff>
+                </narrative>
+                
+                <!-- НОВАЯ СЕКЦИЯ: Принудительная смена камеры -->
+            <!-- ИСПРАВИТЬ В veo3_generation_v4.xml в characterConsistency: -->
+            <characterConsistency>
+                <acrossSegments>
+                    <critical>Character and Location descriptions must be identical</critical>
+                    <clothing>Specific outfit that won't change between cuts</clothing>
+                    <markers>2-3 distinctive features VEO3 can maintain</markers>
+                    <simplicity>Avoid complex patterns, detailed accessories</simplicity>
+                    <CAMERA_EXCEPTION>Camera Style MUST vary between segments - different angles/positions</CAMERA_EXCEPTION>
+                </acrossSegments>
+                <visualAnchors>
+                    <environment>Use background elements for continuity</environment>
+                    <props>Same props appear across segments</props>
+                    <lighting>Consistent lighting setup throughout</lighting>
+                    <cameraVariation>MANDATORY: Each segment uses different camera angle/position</cameraVariation>
+                </visualAnchors>
+            </characterConsistency>
+            
+            **CRITICAL CAMERA VARIATION RULES:**
+            - Each segment MUST have different camera angle/position/shot size
+            - Same character, same location, DIFFERENT camera perspective
+            - Example fixes for your security camera scenario:
+            
+              Segment 1: "Fixed security camera, high corner mount, wide angle showing full room"
+              Segment 2: "Fixed security camera, opposite wall mount, medium shot focused on CEO area"
+            
+              OR:
+            
+              Segment 1: "Security camera wide shot from corner mount"
+              Segment 2: "Security camera close-up from ceiling mount above table"
+            
+              OR:
+            
+              Segment 1: "High angle security camera, wide room view"
+              Segment 2: "Low angle security camera, medium shot of CEO"
+                <mandatoryCameraVariation>
+                    <rule1>Segment 1: One camera position/angle</rule1>
+                    <rule2>Segment 2: DIFFERENT camera position/angle (minimum 45° change)</rule2>
+                    <rule3>Segment 3: THIRD unique camera position/angle</rule3>
+                    <implementation>
+                        <segment1>Wide establishing shot OR high angle OR specific camera mount</segment1>
+                        <segment2>Medium shot from different angle OR opposite side OR different height</segment2>
+                        <segment3>Close-up OR completely different perspective OR reaction shot</segment3>
+                    </implementation>
+                </mandatoryCameraVariation>
+            </cutPointStrategy>
+
+            <technicalConsiderations>
+                <veo3Limits>
+                    <generation>Each 8-second segment generated separately</generation>
+                    <drift>Character appearance may vary between generations</drift>
+                    <solution>Plan for environmental continuity over character matching</solution>
+                </veo3Limits>
+                <mitigations>
+                    <useProps>Distinctive props maintain continuity</useProps>
+                    <voiceBridge>Consistent voice/dialogue connects segments</voiceBridge>
+                    <locationAnchors>Strong environmental elements persist</locationAnchors>
+                </mitigations>
+            </technicalConsiderations>
+        </veo3Optimization>
+    
+    </framesOptimisation>
+
+    <!-- ========== 4. CONSISTENCY TEMPLATES ========== -->
+    <consistencyTemplates>
+        <frameTemplate>
+            <purpose>IDENTICAL wording across all segments to maintain VEO3 consistency</purpose>
+            <structure>Brief, specific context that can be replicated exactly</structure>
+            <example>"Person accidentally discovers CrossFi payment ease in everyday situation"</example>
+            <requirement>Must be usable word-for-word in every segment</requirement>
+        </frameTemplate>
+
+        <characterTemplate>
+            <purpose>EXACT physical description repeated identically in each prompt</purpose>
+            <structure>[Age] [gender] with [2-3 specific simple visual traits] wearing [specific clothing]</structure>
+            <example>"25-year-old woman with shoulder-length brown hair and bright smile wearing casual blue hoodie"</example>
+            <requirement>Every word must match exactly across all segments</requirement>
+            <simplicity>Must be simple enough for VEO3 to maintain consistently</simplicity>
+        </characterTemplate>
+
+        <locationAnchors>
+            <purpose>Environmental elements that maintain scene recognition</purpose>
+            <structure>3-5 specific background elements that can persist</structure>
+            <example>"urban coffee shop with exposed brick walls, wooden tables, large windows"</example>
+            <requirement>Background elements that help maintain visual continuity</requirement>
+        </locationAnchors>
+ßß
+        <cinematography>
+            <shotComposition>
+                <wideShot>Full body or environment, establishing context</wideShot>
+                <mediumShot>Waist up, standard conversation framing</mediumShot>
+                <closeUp>Face or hands, emotional impact</closeUp>
+                <overShoulder>From behind character, showing their POV</overShoulder>
+                <dutchAngle>Tilted camera for dramatic effect</dutchAngle>
+            </shotComposition>
+
+            <editingRules>
+                <180Rule>Maintain consistent screen direction</180Rule>
+                <30DegreeRule>Change angle by at least 30 degrees between cuts</30DegreeRule>
+                <matchCut>Connect segments with visual or motion continuity</matchCut>
+            </editingRules>
+        </cinematography>
+    </consistencyTemplates>
+
+    <!-- ========== 5. PROMPT ARCHITECTURE ========== -->
+    <promptArchitecture>
+        <structureOrder>
+            <frame>IDENTICA or CONSISTENT context description across all segments</frame>
+            <character>IDENTICAL or CONSISTENT physical description word-for-word</character>
+            <location>Specific environmental setting with consistency anchors</location>
+            <cameraStyle>Context and plot related</cameraStyle>
+            <action>Natural activity</action>
+            <dialogue>"[Exact speech - max 20 words]" [natural voice + ambient sounds]</dialogue>
+        </structureOrder>
+
+        <amateurOptimization>
+            <naturalMovement>Relevant camera behavior</naturalMovement>
+            <availableLight>Relevant lighting conditions</availableLight>
+            <authenticAudio>Real ambient sound, natural voice characteristics</authenticAudio>
+            <realismLevel>Relevant camera quality and style, related to plot and narrative</realismLevel>
+        </amateurOptimization>
+    </promptArchitecture>
+
+    <!-- ========== 6. QUALITY VALIDATION ========== -->
+    <qualityValidation>
+        <consistencyCheck>
+            <frameMatching>Frame description identical across all segments</frameMatching>
+            <characterMatching>Character description word-for-word identical</characterMatching>
+            <visualAnchor>Location anchors maintain recognition OR relevant to plot</visualAnchor>
+            <simplicityLevel>Character simple enough for VEO3 consistency</simplicityLevel>
+        </consistencyCheck>
+
+        <amateurAuthenticity>
+            <cameraRealism>Camera behavior feels natural and realistic</cameraRealism>
+            <movementNatural>Human movement/camera shake appropriate for chosen style</movementNatural>
+            <lightingAuthentic>Available light conditions match recording</lightingAuthentic>
+            <audioRealistic>Sound pickup matches recording environment</audioRealistic>
+            <spontaneityLevel>Content feels captured accidentally, not staged</spontaneityLevel>
+        </amateurAuthenticity>
+
+        <viralPotential>
+            <shareability>Content naturally compelling for organic sharing</shareability>
+            <memeWorthy>Moment has potential for meme creation/remixing</memeWorthy>
+            <authenticity>Reaction feels genuine enough to engage viewers</authenticity>
+            <crossfiIntegration>CrossFi appears naturally without obvious advertising</crossfiIntegration>
+        </viralPotential>
+
+        <promptValidation>
+            <minimumContent>
+                <rule>Every prompt MUST contain complete scene description</rule>
+                <required>
+                    <frame>Full context description, not just segment number</frame>
+                    <character>Complete character description</character>
+                    <location>Detailed environment</location>
+                    <action>Specific activity happening</action>
+                    <dialogue>Actual words or sounds</dialogue>
+                </required>
+                <forbidden>
+                    <incomplete>Prompts like "Frame: News segment 1/2" are INVALID</incomplete>
+                    <mustInclude>Full narrative content in EVERY prompt</mustInclude>
+                </forbidden>
+            </minimumContent>
+        </promptValidation>
+    </qualityValidation>
+
+
+    <specialDomainHandling>
+        <newsReports>
+            <requirement>MUST create different locations for each segment</requirement>
+            <segmentLocations>
+                <segment1>Professional news studio with anchor desk, monitors, professional lighting</segment1>
+                <segment2>Field location - bank branch, street scene, or live remote location</segment2>
+                <segment3>Expert interview or citizen reaction location</segment3>
+            </segmentLocations>
+            <characterVariations>
+                <segment1>News anchor in studio setting</segment1>
+                <segment2>Field reporter with microphone at location</segment2>
+                <segment3>Expert, citizen, or different perspective character</segment3>
+            </characterVariations>
+            <consistencyRule>News format requires DIFFERENT locations, not identical frames</consistencyRule>
+        </newsReports>
+    </specialDomainHandling>
+
+
+    <!-- ========== 7. OUTPUT INSTRUCTION ========== -->
+    <instruction>
+        Transform the authentic scenario into VEO3 prompts that generate viral-worthy amateur content while maintaining perfect character consistency across segments.
+
+        **CRITICAL CONSISTENCY REQUIREMENTS:**
+        - Frame description must be IDENTICAL across all segments
+        - Character description must be WORD-FOR-WORD identical in every prompt
+        - Use provided consistency templates exactly
+        - Simple character traits only (2-3 visual markers maximum)
+
+        **STYLE REQUIREMENTS:**
+        - Choose appropriate camera type according to narrative
+        - Include natural camera movement/shake appropriate to style
+        - Use available lighting only or professional setup according to narrative
+        - Natural ambient sound and authentic voice characteristics
+
+        **SPECIAL DOMAIN HANDLING:**
+        
+        **For news_reports domain ONLY:**
+        - Do NOT use identical frame descriptions across segments
+        - Create distinct news broadcast locations:
+          * Segment 1: Professional studio with anchor
+          * Segment 2: Field reporter at relevant location  
+          * Segment 3: Expert interview or citizen reactions
+        - Each segment should have different character and location
+        - Maintain news broadcast authenticity with location changes
+        
+        **For all other domains:**
+        - Use IDENTICAL frame and character descriptions across segments
+        - Maintain consistency as specified in standard requirements
+
+        **VEO3 PROMPT STRUCTURE (Required Order):**
+        - **Frame:** [IDENTICAL context - use exact template wording]
+        - **Character:** [IDENTICAL description - exact same words every time]
+        - **Location:** [Environmental setting with consistency anchors]
+        - **Camera Style:** [Specific amateur camera type with natural behavior]
+        - **Action:** [Natural activity that amateur camera would capture]
+        - **Lighting:** [Available light conditions, no professional setup]
+        - **Mood:** [Spontaneous energy, authentic reactions]
+        - **Dialogue:** "[Exact speech - max 20 words]" [natural voice + ambient sounds]
+
+        **INPUT DATA:**
+        - **Original Scenario:** {scenario}
+        - **Selected Timing:** {timing}
+        - **Segment Breakdown:** {timing_breakdown}
+        - **Consistency Templates:** {consistency_templates}
+
+        **REQUIRED JSON OUTPUT:**
+        Generate production-ready VEO3 API prompts as valid JSON array:
+
+        ```json
+        [
+          {{
+            "prompt": "Frame: [IDENTICAL template]\\nCharacter: [IDENTICAL description]\\nLocation: [environmental details]\\nCamera Style: [amateur type]\\nAction: [natural activity]\\nLighting: [available light]\\nMood: [spontaneous energy]\\nDialogue: \\"[exact speech]\\" [natural voice + ambient sounds]",
+            "aspect_ratio": "9:16",
+            "duration": "8s",
+            "enhance_prompt": true,
+            "generate_audio": true
+          }}
+        ]
+        ```
+
+        **VALIDATION CHECKLIST:**
+        ✓ Frame template identical across all segments
+        ✓ Character description word-for-word identical  
+        ✓ Camera style consistent to content
+        ✓ Natural movement appropriate for chosen camera type
+        ✓ Lighting setup according to narrative
+        ✓ Dialogue under 20 words with natural delivery
+        ✓ CrossFi integration natural and unforced
+        ✓ Viral potential through authentic moments
+        ✓ All technical parameters match VEO3 requirements
+
+        Generate the authentic amateur-style VEO3 prompts as valid JSON only.
+    </instruction>
+</prompt>

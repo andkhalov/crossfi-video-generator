@@ -18,6 +18,8 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
+    console.log('Submitting login form:', { username, password: '***' })
+
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -27,14 +29,21 @@ export default function LoginPage() {
         body: JSON.stringify({ username, password }),
       })
 
+      console.log('Login response status:', response.status)
+      
       if (response.ok) {
+        const data = await response.json()
+        console.log('Login successful, redirecting...')
         router.push('/')
+        router.refresh()
       } else {
         const data = await response.json()
+        console.log('Login failed:', data)
         setError(data.error || 'Ошибка входа')
       }
     } catch (error) {
-      setError('Ошибка соединения')
+      console.error('Login error:', error)
+      setError('Ошибка соединения: ' + (error instanceof Error ? error.message : 'Unknown error'))
     } finally {
       setLoading(false)
     }

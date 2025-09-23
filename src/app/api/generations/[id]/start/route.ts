@@ -5,10 +5,10 @@ import path from 'path'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params
+    const { id } = await params
 
     // Получаем генерацию с данными
     const generation = await db.generation.findUnique({
@@ -57,7 +57,7 @@ export async function POST(
     const domainKey = generation.domains[0]?.domain.key || 'metamask_fox'
     const productData = JSON.parse(generation.product.data)
     
-    const pythonProcess = spawn('python3', [
+    const pythonProcess = spawn('/Users/andreykhalov/anaconda3/bin/python3', [
       pythonScript,
       domainKey,
       JSON.stringify(productData),
@@ -67,7 +67,8 @@ export async function POST(
       env: {
         ...process.env,
         PYTHONPATH: path.join(process.cwd(), 'python')
-      }
+      },
+      cwd: process.cwd()
     })
 
     // Обработка вывода Python скрипта

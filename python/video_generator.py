@@ -29,15 +29,24 @@ class VideoGenerationPipeline:
             domains_file: Файл с доменами
         """
         self.anthropic_client = Anthropic(api_key=api_keys['ANTHROPIC_API_KEY'])
-        fal_client.api_key = api_keys['FAL_KEY']
+        
+        # Настройка fal_client
+        os.environ['FAL_KEY'] = api_keys['FAL_KEY']
+        self.fal_client = fal_client
+        
         self.resemble_key = api_keys.get('RESEMBLE_AI_KEY')
         
-        self.schema_dir = Path(schema_dir)
-        self.domains_file = Path(domains_file)
+        # Определяем пути относительно текущего скрипта
+        script_dir = Path(__file__).parent.parent  # Поднимаемся на уровень выше из python/
+        self.schema_dir = script_dir / "schema"
+        self.domains_file = script_dir / "domains_v6.json"
+        
+        print(f"Schema dir: {self.schema_dir}")
+        print(f"Domains file: {self.domains_file}")
         
         # Настройки директорий
-        self.raw_video_dir = Path("../raw_video")
-        self.ready_video_dir = Path("../ready_video")
+        self.raw_video_dir = script_dir / "raw_video"
+        self.ready_video_dir = script_dir / "ready_video"
         self.raw_video_dir.mkdir(exist_ok=True)
         self.ready_video_dir.mkdir(exist_ok=True)
         
@@ -400,9 +409,8 @@ class VideoGenerationPipeline:
                 "generate_audio": segment.get("generate_audio", True)
             }
 
-            result = fal_client.subscribe("fal-ai/veo3",
-                                        arguments=fal_params,
-                                        with_logs=True)
+            result = fal_client.run("fal-ai/veo3",
+                                   arguments=fal_params)
             url = self._extract_video_url(result)
             video_urls.append(url)
 

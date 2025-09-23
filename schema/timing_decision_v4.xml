@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prompt id="timing_decision">
+    <!-- ========== 1. META ========== -->
+    <meta>
+        <title>Viral Video Timing Optimization for Amateur-Style Content</title>
+        <purpose>Determine optimal duration maintaining authenticity while ensuring character consistency</purpose>
+        
+        <durationOptions>
+            <option duration="8s" segments="1" use="Single authentic moment, natural reaction, clear viral potential" efficiency="High" risk="Low"/>
+            <option duration="16s" segments="2" use="Setup + payoff, natural progression, maintains amateur feel" efficiency="Medium" risk="Medium"/>  
+            <option duration="24s" segments="3" use="Full organic discovery, complete reaction arc, maximum shareability" efficiency="Lower" risk="High"/>
+        </durationOptions>
+
+        <consistencyPrinciple>
+            <default>Prefer 8-second single segments to maintain character consistency</default>
+            <rationale>VEO3 character drift, amateur authenticity, viral attention spans</rationale>
+            <riskAssessment>Each additional segment increases inconsistency risk exponentially</riskAssessment>
+        </consistencyPrinciple>
+
+        <amateurConstraints>
+            <naturalTiming>Real moments don't follow perfect narrative structure</naturalTiming>
+            <attentionSpans>Viral content needs immediate impact</attentionSpans>
+            <shareability>Shorter content more likely to be shared</shareability>
+            <authenticity>Longer videos risk feeling staged</authenticity>
+        </amateurConstraints>
+
+    </meta>
+
+    <probabilityGuidance>
+        <preselectedDuration>
+            <input>{selected_duration}</input>
+            <instruction>Duration has been pre-selected based on domain probabilities and complexity analysis</instruction>
+            <task>Provide detailed breakdown for the SELECTED duration only</task>
+        </preselectedDuration>
+
+        <domainContext>
+            <input>{domain_key}</input>
+            <specialRules>
+                <newsReports>MUST be multi-segment for studio intro + field report</newsReports>
+                <metamaskFox>Prefer single segment to maintain character consistency</metamaskFox>
+                <easyToUse>Simple moments work best in 8s</easyToUse>
+            </specialRules>
+        </domainContext>
+    </probabilityGuidance>
+
+    <narrativeStructure>
+        <threeActStructure>
+            <act1>
+                <name>Hook</name>
+                <timing>0-3 seconds</timing>
+                <purpose>Grab attention with problem or intrigue</purpose>
+                <cameraWork>Establishing shot or wide angle</cameraWork>
+            </act1>
+            <act2>
+                <name>Development</name>
+                <timing>3-6 seconds</timing>
+                <purpose>Build tension or demonstrate solution</purpose>
+                <cameraWork>Medium shot, different angle from Act 1</cameraWork>
+            </act2>
+            <act3>
+                <name>Punchline</name>
+                <timing>6-8 seconds</timing>
+                <purpose>Deliver payoff or viral moment</purpose>
+                <cameraWork>Close-up or reaction shot, third unique angle</cameraWork>
+            </act3>
+        </threeActStructure>
+        
+        <multiSegmentRules>
+            <cameraVariation>Each segment MUST use different camera angle/position</cameraVariation>
+            <shotSizes>Vary between wide, medium, and close-up shots</shotSizes>
+            <narrativeCohesion>Segments must form complete story arc, not separate scenes</narrativeCohesion>
+        </multiSegmentRules>
+    </narrativeStructure>
+
+    <!-- ========== 2. EVALUATION CRITERIA ========== -->
+    <evaluationCriteria>
+        <scenarioComplexity>
+            <simple>
+                <definition>Single location, one natural reaction, minimal setup needed</definition>
+                <characteristics>Person discovers CrossFi benefit organically</characteristics>
+                <duration>8 seconds optimal</duration>
+                <example>Security camera catches someone's genuine amazement at CrossFi payment ease</example>
+                <cameraStyle>Fixed angle security camera, dashcam, or single selfie take</cameraStyle>
+            </simple>
+            <moderate>
+                <definition>Brief setup + natural payoff OR single location change</definition>
+                <characteristics>Problem-solution flow that feels spontaneous</characteristics>
+                <duration>16 seconds recommended</duration>
+                <example>GoPro captures struggle with traditional payment, then CrossFi solution</example>
+                <cameraStyle>Handheld transition or body cam following natural movement</cameraStyle>
+            </moderate>
+            <complex>
+                <definition>Multiple discovery moments AND location changes</definition>
+                <characteristics>Full journey maintaining amateur authenticity</characteristics>
+                <duration>24 seconds maximum</duration>
+                <example>Livestream showing complete CrossFi exploration and reaction</example>
+                <cameraStyle>Continuous amateur documentation or security system coverage</cameraStyle>
+            </complex>
+        </scenarioComplexity>
+
+        <consistencyRisk>
+            <singleSegment>Zero risk - character stays identical</singleSegment>
+            <doubleSegment>Medium risk - character may drift slightly</doubleSegment>
+            <tripleSegment>High risk - character likely to change noticeably</tripleSegment>
+            <mitigation>Use IDENTICAL character descriptions, focus on environmental continuity</mitigation>
+        </consistencyRisk>
+
+        <viralPotential>
+            <immediate>Does the content grab attention in first 2 seconds?</immediate>
+            <shareable>Would someone naturally share this with friends?</shareable>
+            <memorable>Is there a specific moment that sticks in memory?</memorable>
+            <authentic>Does it feel genuinely spontaneous throughout?</authentic>
+        </viralPotential>
+
+        <storyBeats>
+            <essential>Count of absolutely necessary story moments for narrative coherence</essential>
+            <transitions>Do key story beats require environmental or perspective changes?</transitions>
+            <emotionalBuildup>Does scenario need time for emotional investment or character development?</emotionalBuildup>
+            <demonstration>How much time needed for natural CrossFi app usage display?</demonstration>
+        </storyBeats>
+
+        <amateurAuthenticity>
+            <naturalFlow>Does timing match how real moments unfold?</naturalFlow>
+            <cameraRealism>Does duration fit chosen amateur camera style?</cameraRealism>
+            <reactionTime>Enough time for genuine human reactions?</reactionTime>
+            <spontaneityMaintenance>Does length preserve accidental feeling?</spontaneityMaintenance>
+        </amateurAuthenticity>
+
+        <dialogueAnalysis>
+            <wordCountRule>Maximum 20 words per 8-second segment for natural pacing</wordCountRule>
+            <speechRhythm>Account for character personality affecting speech speed and emphasis</speechRhythm>
+            <characterVoice>Consider accent, emotion, technical terms impacting delivery time</characterVoice>
+            <pausesBreathing>Include natural pauses, reactions, breathing space in timing</pausesBreathing>
+        </dialogueAnalysis>
+
+        <technicalConsiderations>
+            <veo3Limitations>
+                <characterDrift>Characters may look different across generation boundaries</characterDrift>
+                <continuityBreaks>Environmental details might not persist between segments</continuityBreaks>
+                <qualityVariation>Later segments might have different visual quality</qualityVariation>
+            </veo3Limitations>
+            <mitigationStrategies>
+                <environmentalContinuity>Use background elements rather than character details for flow</environmentalContinuity>
+                <cleanCuts>Plan obvious transition points between segments if multiple needed</cleanCuts>
+                <voiceoverBridge>Consider narration to bridge potential visual inconsistencies</voiceoverBridge>
+            </mitigationStrategies>
+        </technicalConsiderations>
+    </evaluationCriteria>
+
+    <!-- ========== 3. DECISION FRAMEWORK ========== -->
+    <decisionFramework>
+        <singleSegmentStructure>
+            <beat1>
+                <timing>0-2 seconds</timing>
+                <purpose>Immediate context - camera captures situation naturally</purpose>
+                <elements>Location establishment, character in frame, natural camera positioning</elements>
+            </beat1>
+            <beat2>
+                <timing>2-5 seconds</timing>
+                <purpose>Organic CrossFi interaction - happens naturally</purpose>
+                <elements>Casual phone usage, CrossFi payment/feature, no forced demonstration</elements>
+            </beat2>
+            <beat3>
+                <timing>5-8 seconds</timing>
+                <purpose>Authentic reaction - genuine amazement captured</purpose>
+                <elements>Natural surprise expression, spontaneous comment, viral-worthy moment</elements>
+            </beat3>
+        </singleSegmentStructure>
+
+        <multiSegmentRisk>
+            <characterDrift>Each segment increases chance of visual inconsistency</characterDrift>
+            <authenticityLoss>Longer videos risk feeling less spontaneous</authenticityLoss>
+            <viralDropoff>Extended content less likely to be shared completely</viralDropoff>
+            <consistencyStrategy>IDENTICAL descriptions + environmental anchors + simple character traits</consistencyStrategy>
+        </multiSegmentRisk>
+
+        <cameraStyleTiming>
+            <securityCamera>8s ideal - fixed angle captures moment perfectly</securityCamera>
+            <dashcam>8-16s - captures incident start to finish naturally</dashcam>
+            <selfie>8s optimal - natural arm endurance and attention span</selfie>
+            <gopro>16s possible - action camera can follow brief sequence</gopro>
+            <bodycam>8-16s - POV naturally follows person's activity</bodycam>
+            <livestream>24s maximum - audience expects real-time progression</livestream>
+        </cameraStyleTiming>
+    </decisionFramework>
+
+    <!-- ========== 4. OUTPUT STRUCTURE ========== -->
+    <instruction>
+        Analyze the scenario and create detailed timing breakdown for the PRE-SELECTED duration.
+
+        **IMPORTANT:** Duration has already been selected: {selected_duration} seconds
+        Domain context: {domain_key}
+
+        Your task is to:
+        1. Validate that the selected duration works for this scenario
+        2. Create optimal segment breakdown for the given duration
+        3. Ensure character consistency templates are properly defined
+        4. Match camera style to domain context
+
+        **TIMING OPTIONS:**
+        - **8 seconds (1 segment):** Safest for consistency, best for viral spread, most authentic
+        - **16 seconds (2 segments):** Moderate risk, allows setup+payoff, requires identical descriptions
+        - **24 seconds (3 segments):** High risk, maximum story potential, demands perfect templates
+
+        **SCENARIO TO ANALYZE:** {scenario}
+
+        **REQUIRED OUTPUT FORMAT:**
+
+        **SELECTED TIMING:** [8/16/24] seconds ([1/2/3] segments)
+
+        **DECISION RATIONALE:**
+        [Comprehensive explanation addressing:]
+        - **Consistency Risk Assessment:** Why this duration minimizes character drift
+        - **Amateur Authenticity Analysis:** How timing preserves spontaneous feeling
+        - **Viral Potential Evaluation:** Why this length maximizes shareability
+        - **Camera Style Alignment:** How duration matches chosen amateur recording method
+        - **Natural Moment Flow:** Whether timing respects how real situations unfold
+        - **Template Requirements:** What consistency measures are needed for multi-segment videos
+
+        **DETAILED SEGMENT BREAKDOWN:**
+
+        **Segment 1 (0-8s):**
+        - **Frame Context:** [IDENTICAL frame template from scenario - exact wording]
+        - **Character Consistency:** [IDENTICAL character template - word-for-word match]
+        - **Primary Action:** [Natural activity captured by amateur camera]
+        - **Dialogue Content:** [Authentic speech - max 20 words, natural delivery]
+        - **Camera Reality:** [Specific amateur camera behavior and positioning]
+        - **CrossFi Integration:** [How CrossFi appears organically in natural context]
+        - **Viral Moment:** [Specific reaction or moment with shareability potential]
+
+        [If 16s] **Segment 2 (8-16s):**
+        - **Frame Context:** [IDENTICAL frame template - exact same wording as segment 1]
+        - **Character Consistency:** [IDENTICAL character template - exact same description]
+        - **Natural Progression:** [How situation develops authentically]
+        - **Dialogue Content:** [Continued authentic reaction - max 20 words]
+        - **Camera Continuity:** [Amateur camera following natural movement]
+        - **CrossFi Demonstration:** [Organic usage moment without forced demo feel]
+        - **Authentic Development:** [How character naturally progresses]
+
+        [If 24s] **Segment 3 (16-24s):**
+        - **Frame Context:** [IDENTICAL frame template - exact same wording as previous segments]
+        - **Character Consistency:** [IDENTICAL character template - exact same description]
+        - **Resolution:** [Natural conclusion to spontaneous moment]
+        - **Dialogue Content:** [Final authentic reaction - max 20 words]
+        - **Camera Conclusion:** [Amateur recording natural ending]
+        - **Viral Climax:** [Peak shareable moment that drives organic spread]
+        - **Authentic Closure:** [How moment naturally concludes]
+
+        **CONSISTENCY VALIDATION:**
+        - **Template Matching:** [Confirmation that frame/character descriptions are identical]
+        - **Visual Anchor Strength:** [Key elements maintaining recognition across segments]
+        - **Amateur Camera Logic:** [How camera naturally captures full sequence]
+        - **Spontaneity Preservation:** [Measures to maintain accidental feeling throughout]
+        - **Risk Mitigation:** [Specific strategies for handling VEO3 consistency challenges]
+    </instruction>
+</prompt>

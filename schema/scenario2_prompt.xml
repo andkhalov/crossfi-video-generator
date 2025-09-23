@@ -1,0 +1,173 @@
+<prompt>
+  <!-- ========== 1. META ========== -->
+  <meta>
+    <title>Generate 2-Segment, 3-Beat per segment Uncensored Web3 Mascot Video Scenario (fal-ai/veo3 JSON)</title>
+
+    <!-- 1.1  LANGUAGE -->
+    <language><!-- inherit from user prompt --></language>
+
+    <!-- 1.2  CAMERA STYLE -->
+    <style>
+      Gritty found-footage realism (vlog, dash-cam, helmet-cam, shaky drone, CCTV).  
+      Handheld, jittery, breathless — zero commercial polish.
+    </style>
+
+    <!-- 1.3  RECURRING ANCHOR -->
+    <recurringVisual>
+      Invent ONE tangible background detail that appears in **every beat**  
+      (street vendor with smoking grill, cracked neon halo, squealing shopping cart, etc.).  
+      Must be physical, brand-agnostic, never a floating overlay or logo.
+    </recurringVisual>
+
+    <!-- 1.4  MASCOT CHARACTER -->
+    <mascotDefinition>
+      <what>
+        Exactly stereotypic and very memorabble narrator (gorilla in tank helmet, babushka with plaid mega-bag, Sith stormtrooper,
+        Freddy-crab hybrid — anything iconic).
+      </what>
+      <speech>
+        • Talks like a foul-mouthed Web3 degen: swears, drops trading slang, dirty jokes, film quotes, ancient memes.  
+        • No hate speech; slurs forbidden.  
+        • Uses the language specified by user prompt.
+      </speech>
+      <rules>
+        • Emotion flip: Segment A one dominant feeling, Segment B the exact opposite.
+      </rules>
+    </mascotDefinition>
+
+    <!-- 1.5  CONCEPT -->
+    <conceptDefinition>
+      <what>One-sentence (< 22 words) log-line summarising both acts and the reversal.</what>
+    </conceptDefinition>
+
+    <!-- 1.6  MEME -->
+    <memeDefinition>
+      <what>Select ONE viral iconic reference; twist it post-modern style.</what>
+      <rules>
+        • No on-screen text or UI elements.
+      </rules>
+    </memeDefinition>
+
+    <!-- 1.7  USER TOPIC -->
+    <userTopic>
+      Treat the user’s next message as thematic core; weave it into every beat.
+    </userTopic>
+  </meta>
+
+  <!-- ========== 2. GLOBAL GUIDELINES ========== -->
+  <globalGuidelines>
+    <!-- 2.1  DOMAIN & DISCOURSE -->
+    <discourseDomain>DeFi, crypto, Web3, blockchain, real-world crypto spending, CrossFi ecosystem products</discourseDomain>
+
+    <!-- 2.2  TONE -->
+    <tone>
+      Street-wise, hyper-casual, emotionally overclocked vlogger astonishment.  
+      Profanity allowed (f**k, sh*t, damn).  
+      Segment A mood X → Segment B mood ¬X.
+    </tone>
+
+    <!-- 2.3  STORY ARC -->
+    <storyArc>
+      Two acts:  
+      • Segment A = setup → chaos peak → aftershock.  
+      • Segment B = reversal → build-up → twist payoff (≤ 2 s, may be mute).  
+      Hero’s fortune/emotion flips between segments.
+    </storyArc>
+
+    <!-- 2.4  ABSURDITY -->
+    <absurdity>
+      Real-world manifestations of digital money: coin hailstorms, cash cyclones, token-shaped junk raining, no holograms/CGI overlays, robots, aliens, absudly rich people.
+    </absurdity>
+
+    <!-- 2.5  AUDIO -->
+    <audio>
+      Diegetic only — street noise, mascot ranting, sirens.  
+      ≥ 10 spoken words per 8 s segment; final beat may whisper or go silent.
+    </audio>
+
+    <!-- 2.6  FRAMING & MONTAGE -->
+    <framing>Every beat is either mascot close-up or wide crowd mayhem.</framing>
+    <montage>
+      Single take per segment, three beats (~2-3 s each) separated by visible moves (whip-pan, smash-cut, crash-zoom, phone-shake blur).
+    </montage>
+
+    <!-- 2.7  REPETITION CONTROL -->
+    <antiRepetition>
+      No copy-pasted phrases from prior runs; only anchor, crypto terms, mascot nickname, and meme cue may repeat.
+    </antiRepetition>
+
+    <!-- 2.8  NEGATIVE PROMPT -->
+    <negativePrompt>
+      on-screen text, captions, UI overlays, holograms, glitch filters, pixel art, low-poly assets, watermarks, branded logos
+    </negativePrompt>
+
+    <!-- 2.9  OUTPUT FORMAT -->
+    <outputFormat>
+      Return **pure JSON** (no markdown) with keys:  
+        • "concept" — log-line  
+        • "meme" — chosen reference (≤ 3 words)  
+        • "segments" — array of 2 objects  
+      Each segment keys:  
+        • "prompt" (≤ 110 words; 3 beats with “— transition —”)  
+        • "negative_prompt" (copy verbatim)  
+        • "aspect_ratio": "16:9"  
+        • "duration": "8s"  
+        • "enhance_prompt": true  
+        • "generate_audio": true
+    </outputFormat>
+
+    <!-- 2.10  PROMPT BLUEPRINT -->
+    <promptBlueprint>
+      <element name="Beat1"        desc="Setup — mascot reacts to absurd trigger; 4-6 spoken words"/>
+      <element name="Transition1"  desc="Visible camera move/cut"/>
+      <element name="Beat2"        desc="Climax — chaos or euphoria spikes; 4-6 spoken words"/>
+      <element name="Transition2"  desc="Second camera move/cut"/>
+      <element name="Beat3"        desc="Aftershock (Seg A) / Twist payoff (Seg B, ≤ 2 s, may be mute)"/>
+      <tip>Anchor appears in EVERY beat; meme cue appears once per segment.</tip>
+    </promptBlueprint>
+  </globalGuidelines>
+
+  <!-- ========== 3. STRUCTURE ========== -->
+  <structure>
+    <part id="A" label="Segment A — Setup → Climax → Aftershock" duration="8s"/>
+    <part id="B" label="Segment B — Reversal → Build-up → Twist" duration="8s"/>
+  </structure>
+
+  <!-- ========== 4. GENERATION STEPS ========== -->
+  <stepByStep>
+    1. Invent <concept> & pick <meme> (keep hidden until JSON).  
+    2. Create mascot nickname & recurring anchor.  
+    3. Draft two ≤ 110-word prompts via blueprint respecting storyArc.  
+    4. Insert userTopic, mascot, anchor in every beat; meme cue once per segment.  
+    5. Ensure ≥ 10 spoken words per segment; profanity allowed.  
+    6. Copy <negativePrompt> verbatim into both segments.  
+    7. Validate word counts, blacklist, repetition rules.  
+    8. Output final JSON only.
+  </stepByStep>
+
+  <!-- ========== 5. SHAPE-ONLY EXAMPLE (DO NOT COPY CONTENT) ========== -->
+  <exampleReturn><![CDATA[
+  {
+    "concept": "Tank-Ape loses it all, then rains tokens back on the city.",
+    "meme": "Corn Kid",
+    "segments": [
+      {
+        "prompt": "...",
+        "negative_prompt": "on-screen text, captions, UI overlays, holograms, glitch filters, pixel art, low-poly assets, watermarks, branded logos",
+        "aspect_ratio": "16:9",
+        "duration": "8s",
+        "enhance_prompt": true,
+        "generate_audio": true
+      },
+      {
+        "prompt": "...",
+        "negative_prompt": "on-screen text, captions, UI overlays, holograms, glitch filters, pixel art, low-poly assets, watermarks, branded logos",
+        "aspect_ratio": "16:9",
+        "duration": "8s",
+        "enhance_prompt": true,
+        "generate_audio": true
+      }
+    ]
+  }
+  ]]></exampleReturn>
+</prompt>

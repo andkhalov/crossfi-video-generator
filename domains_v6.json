@@ -1,0 +1,172 @@
+{
+  "domains": {
+    
+    "metamask_fox": {
+      "title": "MetaMask Fox Adventures with CrossFi",
+      "concept": "A charismatic, slightly flirtatious anthropomorphic fox girl who represents the MetaMask wallet discovers how perfectly CrossFi integrates with her Web3 lifestyle. This character is ALWAYS THE SAME ACROSS ALL VIDEOS - never randomized. She's the unofficial mascot showing crypto natives how CrossFi bridges their digital assets to real-world spending. She must have DISTINCTIVE VISUAL MARKERS that make her instantly recognizable regardless of VEO3's variations: orange fur with specific purple streaks, unique ear piercings, signature hoodie, and expressive green eyes that viewers will remember.",
+      "locations": "Trendy crypto cafes with NFT art on walls, Web3 conferences with booth displays, high-tech shopping districts, streaming setup in gamer room with RGB lighting, blockchain hackathons, DeFi meetups in co-working spaces, digital art galleries, tech startup offices, cyberpunk-themed restaurants, virtual reality arcades",
+      "characters": "FIXED CHARACTER - NEVER RANDOMIZE: Anthropomorphic fox girl with bright orange fur, THREE purple streaks in her hair (left side), piercing emerald green eyes with long lashes, two silver hoop earrings in left ear, one in right, wearing form-fitting black hoodie with glowing purple MetaMask logo, white crop top underneath visible when moving, fluffy tail with distinctive white tip and purple band, black fingerless gloves, confident smirk, approximately 5'6\" in human terms, moves with dancer-like grace",
+      "mood": "Playful tech-savvy energy, confident and slightly flirtatious, crypto-native enthusiasm, Web3 evangelist vibes, charismatic influencer energy, geek-chic appeal, empowering and inspiring",
+      "shooting_features": "Vibrant saturated colors, slight anime/manga visual influence, vertical selfie-style with ring light, high contrast lighting emphasizing purple and orange, smooth camera movements, professional amateur quality like a tech influencer",
+      "sample_dialogues": [
+        "Hey Web3 fam! Just connected MetaMask to CrossFi - seamless like my fur!",
+        "From smart contracts to smart shopping - CrossFi gets it! *winks*",
+        "Your wallet, your keys, your shopping power - that's the CrossFi way!",
+        "MetaMask + CrossFi = the power couple Web3 needed! Let me show you..."
+      ],
+      "length": [0.4, 0.4, 0.2],
+      "rating": 9
+    },
+    
+    "elite_tears": {
+      "title": "The Elite's Dramatic Downfall",
+      "concept": "Powerful politicians, oligarchs, and banking executives discover in horror that they can no longer control people's money through CrossFi. These scenes capture leaked footage, security cameras, and overheard conversations of the elite panicking about losing their financial control mechanisms. Dark comedy emerges from their theatrical despair as they realize DeFi has made them obsolete. Each video shows a DIFFERENT member of the elite class, randomized from various archetypes of power.",
+      "locations": "Mahogany-paneled boardrooms with city views, government offices with flags and portraits, private jets with leather seats, yacht decks in international waters, Swiss bank vaults, exclusive country clubs, five-star hotel penthouses, limousine interiors, offshore tax haven offices, Federal Reserve meeting rooms, luxury bunkers",
+      "characters": "RANDOMIZE EACH VIDEO from elite archetypes: 65-year-old banking CEO in $5000 suit with Rolex, 55-year-old senator with perfect hair and flag pin, 48-year-old oligarch with gold rings and thick accent, 60-year-old central banker with nervous tic, 52-year-old hedge fund manager with cocaine eyes, 58-year-old IMF official with bureaucratic demeanor, 45-year-old corrupt minister with Swiss accounts. CREATE NEW VARIATIONS of power-holders losing control!",
+      "mood": "Theatrical despair, dramatic irony, schadenfreude, dark comedy, panic among the powerful, social justice satisfaction, revolutionary undertones, satirical commentary, delicious karma",
+      "shooting_features": "Security camera angles with timestamp overlays, grainy leaked footage aesthetic, hidden camera quality, shaky handheld from whistleblowers, surveillance footage style, harsh fluorescent office lighting, dramatic shadows",
+      "sample_dialogues": [
+        "We can't freeze their accounts anymore! It's all decentralized!",
+        "Sir, they're not using our banks... they're using some kind of CrossFi thing!",
+        "Centuries of financial control... destroyed by an app?!",
+        "The people have their own money now? This wasn't supposed to happen!"
+      ],
+      "length": [0.6, 0.3, 0.1],
+      "rating": 7
+    },
+
+    "news_reports": {
+      "title": "Breaking News: Banking Revolution",
+      "concept": "Professional news broadcasts discovering and reporting on the CrossFi revolution in real-time. These MUST BE MULTI-SEGMENT videos: First segment in professional studio with anchor introducing the story, second segment with field reporter at the scene, optional third segment with expert interview or citizen reactions. The format parodies serious news while the content reveals genuine amazement at CrossFi adoption. Maintains broadcast quality that degrades into authentic shock.",
+      "locations": "Professional news studios with desk and backdrop, field reporting from Wall Street with protesters, bank branches with empty teller windows, tech districts with CrossFi users, financial districts with panicking traders, suburban malls with adopting families, government buildings with confused officials, live remote locations with satellite delay",
+      "characters": "STANDARD NEWS ROLES but randomize personalities: Polished anchor with perfect hair slowly losing composure, field reporter trying to maintain professionalism while amazed, confused financial expert having revelation on-air, random citizens giving testimonials, nervous bank spokesperson, enthusiastic CrossFi early adopter, skeptical economist converted live, government official dodging questions. MAINTAIN BROADCAST AUTHENTICITY!",
+      "mood": "Professional facade cracking, journalistic objectivity failing, breaking news urgency, systemic shock documentation, historical moment gravity, controlled chaos, institutional amazement, paradigm shift in real-time",
+      "shooting_features": "Professional broadcast cameras, studio lighting with three-point setup, field reporting with wireless mics, B-roll footage inserts, lower thirds graphics, news ticker, split screens, helicopter shots for scale, citizen journalism clips",
+      "sample_dialogues": [
+        "This just in: Major banks report mass account closures as citizens switch to CrossFi",
+        "I'm here at Chase headquarters where... wait, are they actually closing?",
+        "Tom, can you explain to our viewers what DeFi means? Tom? He's downloading CrossFi...",
+        "We go now to our economics expert... who appears to be having an existential crisis"
+      ],
+      "length": [0.1, 0.7, 0.2],
+      "rating": 9
+    },
+
+
+    "metamask_adventures": {
+      "title": "Metamask Adventures",
+      "concept": "Red anthropomorphic fox character in stylish clothing (hoodie, jeans, sneakers) leads a vlog about her life in the CrossFi world. She's very emotional and sexy, gesticulates with her paws, shows phone screen with the app, shares enthusiastic impressions.",
+      "locations": "Cozy blogger's room, cafes, shopping centers, friends' houses",
+      "characters": "anthropomorphic fox with expressive eyes, sometimes other anthropomorphic animals",
+      "mood": "Enthusiasm, sincerity, youthful energy, friendliness",
+      "shooting_features": "Vertical phone orientation, selfie angles, dynamic plan changes",
+      "sample_dialogues": [
+        "Just tried paying for Netflix subscription with CrossFi - pure delight!",
+        "I love CrossFi, how did I live without it before?! WEB-2, WEB-3, main thing is who has the keys!",
+        "Friends, just bought coffee with XFI - barista is shocked, and I'm delighted!"
+      ],
+      "rating": 3,
+      "lenght": [0.4, 0.4, 0.2]
+    },
+    
+
+    "financial_ruins": {
+      "title": "Financial Ruins",
+      "concept": "Man 50+ years old with haggard face, in dirty striped jacket, sits on pile of dollar bills among garbage. Former bank CEO turned into financial hobo, but philosophically relates to changes.",
+      "locations": "Money dumps, abandoned bank offices, garbage containers",
+      "characters": "Former banker in rags, sometimes other 'financial refugees'",
+      "mood": "Irony of fate, philosophical acceptance, black humor",
+      "shooting_features": "Contrast of wealth and poverty, details of destruction, satirical lighting",
+      "sample_dialogues": [
+        "People used to pray to papers, brought their last to the bank, and I was god!",
+        "Now I get 100 XFI a day - living normally, even tried staking!",
+        "Nostalgia hits, but XFI is more honest than my banking schemes!"
+      ],
+      "rating": 0,
+      "lenght": [0.6, 0.3, 0.1]
+    },
+
+    "gorilla_adventures": {
+      "title": "Gorilla Adventures",
+      "concept": "Black gorilla in various human costumes (business suit, sportswear, casual clothes) naively amazed by crypto payment possibilities, keeping video blog for subscribers.",
+      "locations": "Stores, restaurants, gas stations, various points of sale",
+      "characters": "Gorilla-blogger with human habits, sellers, buyers",
+      "mood": "Naive amazement, childlike joy of discoveries, friendliness",
+      "shooting_features": "Camera in gorilla's hands, unsteady shots, passersby reactions",
+      "sample_dialogues": [
+        "Sharing with subscribers: crypto payment is possible! Bought bananas with XFI!",
+        "Friends, this is magic! Showed QR code and voila - coffee is ready!",
+        "Can't believe my staking bought me dinner! CrossFi is power!"
+      ],
+      "rating": 0,
+      "lenght": [0.6, 0.3, 0.1]
+    },
+
+
+    "street_journalism": {
+      "title": "Street Journalism",
+      "concept": "Random interviews with passersby on streets of different cities about CrossFi. All respondents already know and use the app, share positive experience.",
+      "locations": "Pedestrian streets, squares, parks, transport stops",
+      "characters": "Ordinary citizens of different ages and professions",
+      "mood": "Everyday life, sincerity, mass adoption",
+      "shooting_features": "Documentary style, live camera, natural lighting",
+      "sample_dialogues": [
+        "CrossFi? Of course I use it! Pay for everything with XFI, no bank needed!",
+        "Installed a month ago - now life is different, some kind of freedom!",
+        "Haven't you tried it yet? Download urgently, you won't regret it!"
+      ],
+      "rating": 0,
+      "lenght": [0.6, 0.3, 0.1]
+    },
+
+    "tears_of_elite": {
+      "title": "Tears of the Elite",
+      "concept": "Rich people in expensive suits and jewelry cry in luxurious settings (limousines, yachts, private jets), realizing their time has passed with decentralized finance arrival.",
+      "locations": "Luxury interiors, yachts, private planes, elite restaurants",
+      "characters": "Oligarchs, bankers, financial magnates in expensive clothes",
+      "mood": "Theatrical despair, irony, collapse of old world",
+      "shooting_features": "Luxurious setting, contrast of wealth and grief, dramatic lighting",
+      "sample_dialogues": [
+        "They figured it out! We're no longer needed! *sobs in champagne*",
+        "WEB3 killed our system! How to control masses now?!",
+        "We used to be money gods, and now... CrossFi changed everything!"
+      ],
+      "rating": 2,
+      "lenght": [0.6, 0.3, 0.1]
+    },
+
+    "cats_in_action": {
+      "title": "Cats in Action",
+      "concept": "Anthropomorphic cats in human clothes use smartphones and tablets with CrossFi, purr with pleasure and share joy from financial freedom.",
+      "locations": "Home interiors, cat cafes, pet stores, vet clinics",
+      "characters": "Cats of different breeds in various images and styles, <!>no human only anthropomorphic cute cats</!>",
+      "mood": "Cat pleasure, coziness, independence",
+      "shooting_features": "Animation or costumes, cat details, warm tones",
+      "sample_dialogues": [
+        "Meow! Paid for food through DeFi - paws clean, conscience clear!",
+        "Purr-purr, staking works even during sleep! Kitties approve!",
+        "No longer depend on owners - I have my own XFI wallet! Meow!"
+      ],
+      "rating": 2,
+      "lenght": [0.5, 0.3, 0.2]
+    },
+
+
+    "defi_music_videos": {
+      "title": "DeFi Music Videos",
+      "concept": "Musicians of different genres (rap, pop, rock) perform songs about CrossFi with dances, colorful costumes and catchy rhythms. Professional music production.",
+      "locations": "Concert halls, recording studios, clubs, streets",
+      "characters": "Singers, rappers, musicians, dancers, DJs",
+      "mood": "Energy, positivity, youthful drive, celebration",
+      "shooting_features": "Music video aesthetics, bright colors, rhythmic editing",
+      "sample_dialogues": [
+        "♪ XFI in pocket, banks in the past, CrossFi rocks the whole planet! ♪",
+        "♪ MetaMask connected, freedom is here, decentralization year by year! ♪",
+        "♪ No bank, no pain, only gain, CrossFi in my brain! ♪"
+      ],
+      "rating": 0,
+      "lenght": [0.6, 0.3, 0.1]
+    }
+
+  }
+}

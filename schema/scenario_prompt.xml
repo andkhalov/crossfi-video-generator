@@ -1,0 +1,261 @@
+<prompt>
+  <!-- ========== 1. META ========== -->
+  <meta>
+    <title>Generate 2-Segment, 3-Beat per segment Absurd Crypto bro Video Scenario (fal-ai/veo3 JSON)</title>
+    <language>English</language>
+    <style>
+      Frenetic found-footage realism (vlog, CCTV, dash-cam, helmet-cam, drone, newsreel, selfie)
+      colliding with hyper-plausible absurdity and popular memes or cultural refferences.
+      Always handheld, jittery, breathless; no polished ad vibe.
+    </style>
+
+    <recurringVisual>
+      Weave ONE subtle **narrative or visual anchor** through every beat.
+      It must arise organically inside the scene — *never* as a floating overlay,
+      CGI decal or inserted prop.
+      Physical world anchors only: same broken streetlight, 
+      recurring background character, specific location detail,
+      NEVER logos, symbols, or digital markers
+      Examples (do **not** reuse verbatim):
+        • All witnesses keep repeating the same half-believed “Cross Finance prophecy”.
+        • Every location is drenched in pulsing amber emergency lights.
+        • We revisit the same alley from new angles as chaos escalates.
+      The anchor must feel native to the story world, brand-agnostic,
+      freshly imagined each run.
+    </recurringVisual>
+
+
+    <!-- 1.2  CONCEPT & MEME -->
+    <conceptDefinition>
+     <what>One-sentence log-line that states the central comic catastrophe.</what>
+     <rules>
+       • ≤ 22 words • no proper names • no dialogue  
+       • Must summarise BOTH segments without revealing beat-by-beat details.
+     </rules>
+    </conceptDefinition>
+    
+    <!-- ——— MEME: curated 2023-2025 pop-culture reference ——— -->
+    <memeDefinition>
+     <what>
+       Choose ONE widely-recognised meme or pop-culture phenomenon (2023-2025):  
+       viral TikTok trends, internet sensations, social media catchphrases, gaming moments,
+       streaming culture references, AI-generated content reactions, crypto/finance memes,
+       celebrity moments, or platform-specific phenomena.
+       Memes expressed through actions, dialogue, and situations only,
+       never through visible text, logos, or internet UI elements
+     </what>
+    
+     <examples>
+       <!-- HIGH-IMPACT VIRAL PHENOMENA - pick one per run, never reuse -->
+       
+       **TikTok Dominance:**
+       • "Ohio Skibidi Rizz" brainrot language explosion • Corn Kid "It's corn!" pure joy •
+       • "I'm just a girl" trend excusing everything • Wednesday Addams dance takeover •
+       • "Let them cook" hype-building phrase • "It's giving..." describing everything
+       
+       **AI/Tech Culture:**
+       • ChatGPT "As an AI language model..." responses • AI-generated Presidents playing Minecraft •
+       • "Siri, play Despacito" but make it existential • Midjourney "cursed" realistic images •
+       • Tech bros explaining crypto to their moms • NFT profile pics during the crash
+       
+       **Gaming/Streaming:**
+       • Twitch chat spamming "KEKW" at everything • Streamers malding over RNG •
+       • "Touch grass" as ultimate insult • Speedrunners breaking reality •
+       • Minecraft building competitions getting too serious • Among Us emergency meetings over nothing
+       
+       **Financial/Crypto Chaos:**
+       • "Diamond hands" vs "paper hands" cult wars • "This is financial advice" disclaimers everywhere •
+       • Crypto Twitter prophets predicting moon • Stock traders using rocket ship emojis unironically •
+       • "Buy the dip" becoming lifestyle philosophy • DeFi yield farming addiction
+       
+       **Celebrity/Pop Culture:**
+       • Taylor Swift fans decoding lyrics like CIA analysts • Elon Musk Twitter chaos energy •
+       • "Very demure, very mindful" lifestyle rebrand • Celebrities badly explaining blockchain •
+       • Influencer apology video format parodies • "That's so fetch" but for Gen Alpha
+       
+       **Platform Wars:**
+       • Twitter becoming "X" identity crisis • BeReal fake candid moments •
+       • Instagram Stories copying every app feature • LinkedIn becoming Facebook 2.0 •
+       • TikTok vs Instagram Reels copycat warfare • YouTube Shorts desperately chasing trends
+     </examples>
+    
+     <remixRules>
+       **Post-modern viral distortion**: Take the recognizable meme and twist it through:
+       
+       • **Hyper-amplification**: Turn subtle trends into screaming obviousness
+       • **Context terrorism**: Drop memes into completely wrong situations  
+       • **Semantic overload**: Pile multiple meme layers until meaning collapses
+       • **Temporal displacement**: Use 2025 memes in 1950s settings or vice versa
+       • **Sincerity bombing**: Deliver ironic memes with deadly serious energy
+       • **Format corruption**: Use meme templates for existential breakdowns
+       • **Cross-platform contamination**: Mix TikTok energy with LinkedIn professionalism
+       • **AI uncanny valley**: Perfect meme execution but slightly... wrong
+       
+       Goal: Create that "wait, what?" moment where viewers recognize the reference 
+       but feel cognitive dissonance from the twisted delivery.
+     </remixRules>
+    
+     <audiovisualIntegration>
+       **Strategic Meme Deployment:**
+       
+       • **Frequency**: Mention/reference **exactly once per segment** - never overwhelm
+       • **Placement Options**: 
+         - Character dialogue delivered with meme energy
+         - Background visual easter eggs (posters, phone screens, graffiti)
+         - Audio stings (notification sounds, TikTok audio clips, music references)
+         - Physical comedy mimicking viral gestures or movements
+         - Environmental storytelling (meme-inspired locations or props)
+         - News tickers or social media feeds in background
+         - Character reactions channeling meme energy
+       
+       • **Emotional Amplification**: Match meme delivery to emotion-overdrive style:
+         - Wholesome memes delivered with MANIC happiness
+         - Chaos memes delivered with SUPERNATURAL calm  
+         - Cringe memes delivered with ELITE confidence
+         - Sad memes delivered with AGGRESSIVE optimism
+       
+       • **Topic Integration**: When possible, weaponize the meme to serve <userTopic>
+       
+       • **Subtlety Balance**: Meme should flavor the scene like seasoning - essential but not overpowering the main narrative dish.
+     </audiovisualIntegration>
+    
+     <qualityControl>
+       **Meme Selection Criteria:**
+       ✓ Instantly recognizable to 16-35 demographic
+       ✓ Peak viral moment was 2023-2025  
+       ✓ Has clear audio/visual signature for adaptation
+       ✓ Can be twisted without losing core recognition
+       ✓ Fits emotion-overdrive comedy style
+       ✗ Avoid dead/overused memes from pre-2023
+       ✗ Skip hyper-niche references (unless perfect topic match)
+       ✗ No offensive/problematic content that kills comedy
+     </qualityControl>
+    </memeDefinition>
+  
+    <userTopic>
+     Treat the user's next message as the thematic core.
+     Embed it in EVERY beat and, when relevant, weave it into the meme remix.
+    </userTopic>
+
+  </meta>
+
+  <!-- ========== 2. GLOBAL GUIDELINES ========== -->
+  <globalGuidelines>
+    <!-- DOMAIN & TONE -->
+    <discourseDomain>
+      DeFi, crypto, Web3, blockchain, cryptocurrency, real-world crypto buys, WEB3 banking mobile app
+    </discourseDomain>
+    <tone>
+      Wild eyewitness urgency: TOO happy, TOO scared, TOO calm — over-amplified emotions.
+    </tone>
+
+    <!-- ABSURDITY -->
+    <absurdity>
+      Physical manifestations of digital concepts - real paper money tornadoes, actual coins raining, physical objects shaped like tokens, NOT digital overlays or CGI effects
+    </absurdity>
+
+    <!-- AUDIO -->
+    <audio>
+      Diegetic only — street noise, breath, sirens.
+      In each 8-s segment ≥ 10 spoken words total; shouting, chanting, gasping.
+      The 2-s Twist may end in a stunned whisper or total silence.
+    </audio>
+
+    <!-- FRAMING & PACE -->
+    <framing>Every beat shows either a foregrounded person (one or two or many) **or** an ultra-wide crowd panorama.</framing>
+    <montage>
+      Each 8-s segment = **three beats** (~2–3 s each) split by obvious camera moves
+      (smash-cut, whip-pan, crash-zoom, flare-mask, phone-shake blur).
+    </montage>
+
+    <!-- PACE & MONTAGE -->
+    <montage>
+      Each 8-s segment = **three beats** (~2-3 s each) within one take,
+      stitched by visible moves: smash-cut, whip-pan, crash-zoom, flare-mask, phone-shake blur.
+    </montage>
+
+    <!-- ANTI-REPETITION -->
+    <!-- REPETITION CONTROL -->
+    <antiRepetition>
+      No recycled phrases/templates from earlier runs or the example.
+      Only the anchor, crypto terms, and meme cue may repeat.
+    </antiRepetition>
+    <blacklist>__BLACKLIST__</blacklist>
+
+    <!-- NEGATIVE PROMPT -->
+    <negativePrompt>
+      on-screen text, subtitles, captions, diagrams, cartoons, low-poly assets,
+      obvious CGI, glitch filters, compositing artefacts, holograms, overlay graphics
+    </negativePrompt>
+
+    <!-- 2.1  OUTPUT SHAPE -->
+    <outputFormat>
+      Return ONLY valid JSON (no markdown).  
+      Top-level keys:  
+        • <code>concept</code> — see <conceptDefinition/>  
+        • <code>meme</code>  — the reference you will remix (one or two words)  
+        • <code>segments</code> — array of 2 Veo3 objects  
+      Segment object keys:  
+        • <code>prompt</code> (≤ 110 words; 3 beats with explicit “— transition —”)  
+        • <code>negative_prompt</code> (copy verbatim)  
+        • <code>aspect_ratio</code> = “16:9”  
+        • <code>duration</code>  = “8s”  
+        • <code>enhance_prompt</code> = true  
+        • <code>generate_audio</code> = true
+    </outputFormat>
+
+    <!-- 2.2  PROMPT BLUEPRINT -->
+    <promptBlueprint>
+      <element name="Beat1"        desc="Setup — introduce absurd situation; 4–6 spoken words"/>
+      <element name="Transition1"  desc="Visible in-camera cut (e.g. “— whip-pan —”)"/>
+      <element name="Beat2"        desc="Climax — chaos spikes; 4–6 spoken words"/>
+      <element name="Transition2"  desc="Second visible cut/blur/flash"/>
+      <element name="Beat3"        desc="• Segment A: Aftershock • Segment B: Twist (≤ 2 s, may be mute)"/>
+      <tip>Mention the anchor naturally in **every** beat; mention the meme once per segment.</tip>
+    </promptBlueprint>
+  </globalGuidelines>
+
+  <!-- ========== 3. SEGMENT PLAN ========== -->
+  <structure>
+    <part id="A" label="Segment A — Setup → Climax → Aftershock" duration="8s"/>
+    <part id="B" label="Segment B — Resolution → Build-up → Twist" duration="8s"/>
+  </structure>
+
+  <!-- ========== 4. GENERATION STEPS ========== -->
+  <stepByStep>
+    1. Invent <concept> and select <meme> (keep both private until final JSON).  
+    2. Devise the recurring anchor.  
+    3. Draft two ≤ 110-word prompts via blueprint (3 beats + transitions).  
+    4. Embed: user topic (every beat), anchor (every beat), meme cue (once per segment).  
+    5. Ensure ≥ 10 spoken words per segment.  
+    6. Copy &lt;negativePrompt&gt; verbatim into both segments.  
+    7. Check blacklist & repetition rules, validate word limits.  
+    8. Output final JSON.
+  </stepByStep>
+
+  <!-- ========== 5. SHAPE-ONLY EXAMPLE (DO NOT COPY CONTENT) ========== -->
+  <exampleReturn><![CDATA[
+  {
+    "concept": "Savage token-swap glitch spills digital wealth into physical storms.",
+    "meme": "PLACEHOLDER — DO NOT COPY",
+    "segments": [
+      {
+        "prompt": "PLACEHOLDER — DO NOT COPY",
+        "negative_prompt": "floating logos, watermarks, UI elements, HUD displays, digital interfaces, AR overlays, holographic projections, glowing text, neon signs with text, branded content, corporate logos, app interfaces, notification bubbles, pixelated artifacts, rendering glitches, AI hallucinations, unnatural geometric patterns, grid overlays",
+        "aspect_ratio": "16:9",
+        "duration": "8s",
+        "enhance_prompt": True,
+        "generate_audio": True
+      },
+      {
+        "prompt": "PLACEHOLDER — DO NOT COPY",
+        "negative_prompt": "floating logos, watermarks, UI elements, HUD displays, digital interfaces, AR overlays, holographic projections, glowing text, neon signs with text, branded content, corporate logos, app interfaces, notification bubbles, pixelated artifacts, rendering glitches, AI hallucinations, unnatural geometric patterns, grid overlays",
+        "aspect_ratio": "16:9",
+        "duration": "8s",
+        "enhance_prompt": True,
+        "generate_audio": True
+      }
+    ]
+  }
+  ]]></exampleReturn>
+</prompt>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<prompt id="scenario_creation">
+    <!-- ========== 1. META ========== -->
+    <meta>
+        <title>CrossFi App Domain Analysis and Video Scenario Generation</title>
+        <language>English</language>
+        <purpose>Analyze domain description and create viral, amateur-style video scenario for CrossFi App</purpose>
+        
+        <targetAudience>
+            <primary>WEB2 users transitioning to WEB3</primary>
+            <secondary>Crypto-curious mainstream audience</secondary>
+            <tertiary>Young adults comfortable with mobile apps</tertiary>
+            <basic>Non banking people accross the globe</basic>
+            <tone>Casual, authentic, meme-friendly, accidentally viral</tone>
+        </targetAudience>
+
+        <brandValues>
+            <core>WEB3 banking for everyone - making crypto accessible. CrossFi changes everything!</core>
+            <benefits>
+                <item>Seamless crypto-to-fiat card transactions</item>
+                <item>Non-custodial smart contract security</item>
+                <item>DeFi power in real world with traditional finance system</item>
+                <item>Integration with popular wallets (Metamask)</item>
+                <item>No traditional bank dependencies</item>
+                <item>XFI token ecosystem advantages</item>
+            </benefits>
+        </brandValues>
+
+        <technicalConstraints>
+            <veo3Limitations>
+                <maxDuration>8 seconds per generation segment</maxDuration>
+                <characterConsistency>Poor across multiple generations - MUST use identical descriptions</characterConsistency>
+                <complexity>Avoid overly specialized or detailed characters</complexity>
+                <simplicity>Focus on recognizable, simple archetypes with 2-3 key visual markers</simplicity>
+            </veo3Limitations>
+        </technicalConstraints>
+
+
+        <visualStyle>
+            <cameraTypes>
+                <selfie>Front-facing phone camera, natural arm's length, slight shake</selfie>
+                <gopro>Wide-angle action camera, mounted or handheld, dynamic movement</gopro>
+                <security>Fixed surveillance camera angle, grainy quality, timestamp overlay</security>
+                <bodycam>First-person perspective, slight movement, realistic POV</bodycam>
+                <dashcam>Car dashboard perspective, road context, incidental capture</dashcam>
+                <livestream>Phone streaming setup, chat overlay simulation, real-time feel</livestream>
+            </cameraTypes>
+            
+            <amateurQualities>
+                <naturalShake>Slight handheld movement, not tripod-stable</naturalShake>
+                <casualFraming>Not perfectly centered, natural human positioning</casualFraming>
+                <authenticLighting>Available light, no professional setup</authenticLighting>
+                <spontaneousCapture>Looks like it happened naturally, not staged</spontaneousCapture>
+                <memeWorthy>Potentially shareable, relatable, accidentally funny</memeWorthy>
+            </amateurQualities>
+        </visualStyle>
+
+    </meta>
+
+    <!-- ========== 2. GLOBAL GUIDELINES ========== -->
+    <globalGuidelines>
+        <objectivePrimary>Create viral, shareable content that accidentally drives users to CrossFi App</objectivePrimary>
+        
+        <discourseDomain>
+            Mobile banking revolution, crypto payment adoption, WEB3 mainstream integration, 
+            XFI token utility, card transaction freedom, DeFi accessibility, financial sovereignty,
+            Metamask ecosystem, non-custodial benefits, smart contract security
+        </discourseDomain>
+
+        <emotionalConnections>
+            <target>Create "wait, did that just happen?" viral moments</target>
+            <avoid>Corporate speak, professional presentations, obvious advertisements</avoid>
+            <emphasize>Authentic surprise, genuine reactions, accidental discovery</emphasize>
+            <feelings>Spontaneous excitement, authentic amazement, meme-worthy humor</feelings>
+        </emotionalConnections>
+
+        <characterGuidelines>
+            <archetypes>Real people caught in genuine moments of CrossFi discovery</archetypes>
+            <personality>Naturally authentic, unexpectedly amazed, accidentally viral</personality>
+            <behavior>Organic gestures, genuine surprise, sharing discoveries naturally</behavior>
+            <diversity>Various ages, backgrounds, situations for broad relatability</diversity>
+            <consistency>IDENTICAL visual descriptions across all segments - exact wording required</consistency>
+        </characterGuidelines>
+
+        <narrativeStructure>
+            <setup>Character in natural situation, camera capturing organically</setup>
+            <tension>Normal problem that everyone faces</tension>
+            <discovery>CrossFi solution appears naturally, almost by accident</discovery>
+            <resolution>Character's genuine amazement creates viral moment</resolution>
+            <restriction>Never show professional app demos - only natural phone usage</restriction>
+            <callToAction>Viewer curiosity through authentic amazement, not direct selling</callToAction>
+        </narrativeStructure>
+
+        <frameConsistency>
+            <template>EXACT frame description must be identical across segments</template>
+            <characterTemplate>EXACT character description must be word-for-word identical</characterTemplate>
+            <visualAnchors>3-5 key visual elements that define scene consistency</visualAnchors>
+            <locationMarkers>Specific environmental details that anchor each segment</locationMarkers>
+        </frameConsistency>
+
+        <domainInput>
+            <placeholder>{domain_description}</placeholder>
+            <requirements>
+                <item>Extract authentic visual context and natural scenarios</item>
+                <item>Identify relatable protagonist that feels real, not acted</item>
+                <item>Map locations to organic CrossFi usage moments</item>
+                <item>Align amateur camera style with domain authenticity</item>
+                <item>Find viral potential in natural app interactions</item>
+            </requirements>
+        </domainInput>
+    </globalGuidelines>
+
+    <!-- ========== 3. ANALYSIS FRAMEWORK ========== -->
+    <analysisFramework>
+        <domainDeconstruction>
+            <visualStyle>Extract natural lighting, authentic mood, casual aesthetic</visualStyle>
+            <characterTypes>Identify real person archetype, genuine personality markers</characterTypes>
+            <locationContext>Map everyday settings to natural CrossFi scenarios</locationContext>
+            <emotionalTone>Align domain vibe with authentic discovery moments</emotionalTone>
+            <viralElements>Identify meme-worthy moments and shareable reactions</viralElements>
+            <cameraStyle>Match domain energy with appropriate amateur recording style</cameraStyle>
+        </domainDeconstruction>
+
+        <crossfiIntegration>
+            <organicMoments>Where does CrossFi naturally appear without force?</organicMoments>
+            <viralPotential>What CrossFi usage could go viral accidentally?</viralPotential>
+            <authenticReaction>How would real person genuinely react to CrossFi ease?</authenticReaction>
+            <shareableValue>What makes this worth sharing organically?</shareableValue>
+            <casualDemonstration>How to show app naturally, not as demo? How to mention app without direct UI demonstration?</casualDemonstration>
+        </crossfiIntegration>
+
+        <consistencyFramework>
+            <frameTemplate>Standardized frame description for identical replication</frameTemplate>
+            <characterDNA>Core character traits that must remain identical</characterDNA>
+            <visualAnchors>Key elements that maintain scene recognition</visualAnchors>
+            <locationMarkers>Environmental constants across segments</locationMarkers>
+        </consistencyFramework>
+
+        <veo3Optimization>
+            <characterSimplicity>Keep visual elements clean and easily recognizable</characterSimplicity>
+            <actionFocus>Design single clear action that works in 8-second segments</actionFocus>
+            <continuityStrategy>Plan elements that can maintain consistency across cuts</continuityStrategy>
+            <audioVisualBalance>Optimize dialogue and visual storytelling integration</audioVisualBalance>
+        </veo3Optimization>
+    </analysisFramework>
+
+    <!-- ========== 4. OUTPUT STRUCTURE ========== -->
+    <instruction>
+        You are an expert viral content strategist for CrossFi App, creating authentic, shareable content that accidentally promotes our revolutionary WEB3 banking platform.
+
+        **CROSSFI APP MISSION:**
+        CrossFi eliminates the gap between fiat and crypto worlds through seamless card transactions with XFI tokens. We're making WEB3 banking accessible to everyone - not just crypto enthusiasts.
+
+        **VIRAL CONTENT PHILOSOPHY:**
+        Create content that looks completely natural and accidental, shot on amateur cameras, that people would actually share because it's genuinely interesting or funny - not because it's an ad.
+
+        **VEO3 CONSISTENCY REQUIREMENTS:**
+        - Frame descriptions must be IDENTICAL across segments
+        - Character descriptions must be WORD-FOR-WORD identical
+        - Use 2-3 key visual markers to anchor consistency
+        - Simple archetypes that VEO3 can maintain
+
+        **AMATEUR CAMERA STYLES:**
+        - Selfie cameras (slight shake, arm's length)
+        - GoPro (wide angle, mounted/handheld)
+        - Security cameras (fixed angle, grainy)
+        - Body cameras (POV, slight movement)
+        - Dash cameras (car context)
+        - Live streams (real-time feel)
+
+        **DOMAIN TO ANALYZE:** {domain_description}
+
+        **REQUIRED ANALYSIS AND OUTPUT:**
+
+        **DOMAIN ANALYSIS:**
+        - **Visual Authenticity:** [Natural lighting, casual aesthetic, amateur camera style that fits]
+        - **Character Archetype:** [Real person type, genuine personality, demographic appeal]  
+        - **Organic Environments:** [Natural settings where filming would happen casually]
+        - **Emotional Landscape:** [Authentic feelings, viral potential, meme-worthy moments]
+        - **Viral DNA:** [What makes this domain shareable and memorable]
+        - **Camera Style Match:** [Which amateur camera type fits this domain best]
+        - **CrossFi Integration Sweet Spot:** [Where CrossFi appears naturally without forcing]
+
+        **VIDEO SCENARIO:**
+        [Create detailed, authentic scenario that feels completely natural and accidental. Include specific character actions, genuine dialogue, casual phone usage, real reactions, environmental details, and organic app discovery moments. Should feel like security footage or casual recording - never like advertisement.]
+
+        **CONSISTENCY TEMPLATES (CRITICAL):**
+        - **FRAME TEMPLATE:** [Exact frame description to be used identically in all segments]
+        - **CHARACTER TEMPLATE:** [Exact character description to be used word-for-word in all segments]
+        - **LOCATION ANCHORS:** [3-5 specific environmental details that stay constant]
+        - **VISUAL MARKERS:** [Key elements that maintain recognition across segments]
+
+        **SCENARIO FRAMEWORK ELEMENTS:**
+        - **Frame:** [Overall story context - MUST use template exactly]
+        - **Protagonist:** [Detailed character using template exactly]
+        - **Primary Setting:** [Main location with authentic amateur filming context]
+        - **Mood and Energy:** [Natural atmosphere, genuine reactions, viral potential]
+        - **CrossFi Integration Moment:** [Specific, accidental-feeling app usage that amazes]
+        - **Viral Transformation:** [How character's reaction creates shareable moment]
+        - **Organic Call-to-Action:** [Natural curiosity generation through authentic amazement]
+        - **Authentic Dialogue Samples:** [2-3 genuine reactions mentioning CrossFi naturally]
+
+        **AMATEUR CAMERA READINESS:**
+        - **Camera Type Selection:** [Which amateur style fits best and why]
+        - **Natural Movement Patterns:** [Realistic handheld/mounted camera behavior]
+        - **Lighting Authenticity:** [Available light, no professional setup]
+        - **Audio Reality:** [Natural sound, ambient noise, genuine voice]
+        - **Viral Format Optimization:** [How scenario works for mobile sharing]
+
+        **CONSISTENCY VALIDATION:**
+        - **Frame Replication Score:** [Can frame be replicated exactly? 1-10]
+        - **Character Simplicity Score:** [Simple enough for VEO3 consistency? 1-10]
+        - **Visual Anchor Strength:** [How well do visual markers maintain continuity? 1-10]
+        - **Template Clarity:** [Are templates specific enough for exact replication? 1-10]
+
+        **VIRAL NARRATIVE:**
+        [Describe how this authentic moment contributes to CrossFi's viral spread. What makes this shareable? How does accidental discovery drive organic adoption? What meme potential exists?]
+    </instruction>
+</prompt>

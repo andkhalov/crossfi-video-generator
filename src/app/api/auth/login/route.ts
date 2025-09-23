@@ -1,15 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getUser, verifyPassword } from '@/lib/auth'
+import { db } from '@/lib/db'
 import jwt from 'jsonwebtoken'
 
 export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json()
+    
+    console.log('Login attempt:', { username, password: '***' })
 
     // Проверяем фиксированные креды
     if (username === 'LoreCore' && password === 'lorecore_2025') {
+      // Создаем или находим пользователя
+      let user = await db.user.findUnique({
+        where: { username: 'LoreCore' }
+      })
+
+      if (!user) {
+        user = await db.user.create({
+          data: {
+            id: 'admin',
+            username: 'LoreCore',
+            password: 'hashed_password',
+          }
+        })
+        console.log('Created admin user')
+      }
+
       const token = jwt.sign(
-        { username, userId: 'admin' },
+        { username, userId: user.id },
         process.env.NEXTAUTH_SECRET || 'fallback-secret',
         { expiresIn: '24h' }
       )
@@ -22,9 +40,11 @@ export async function POST(request: NextRequest) {
         path: '/',
       })
 
+      console.log('Login successful')
       return response
     }
 
+    console.log('Invalid credentials')
     return NextResponse.json(
       { error: 'Неверные учетные данные' },
       { status: 401 }
@@ -32,7 +52,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Login error:', error)
     return NextResponse.json(
-      { error: 'Ошибка сервера' },
+      { error: 'Ошибка сервера: ' + (error instanceof Error ? error.message : 'Unknown error') },
       { status: 500 }
     )
   }
