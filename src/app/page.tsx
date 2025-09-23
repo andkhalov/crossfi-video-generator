@@ -168,9 +168,11 @@ export default function HomePage() {
                       </Link>
                       
                       {generation.status === 'COMPLETED' && generation.finalVideo && (
-                        <Button variant="ghost" size="sm">
-                          <Download className="h-4 w-4" />
-                        </Button>
+                        <a href={`/api/generations/${generation.id}/download?type=final`} download>
+                          <Button variant="ghost" size="sm">
+                            <Download className="h-4 w-4" />
+                          </Button>
+                        </a>
                       )}
                     </div>
                   </CardContent>

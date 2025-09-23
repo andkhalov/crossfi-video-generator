@@ -76,14 +76,48 @@ export async function POST(
       const output = data.toString()
       console.log('Python output:', output)
       
-      // Добавляем лог в базу
-      await db.generationLog.create({
-        data: {
-          generationId: id,
-          message: output.trim(),
-          level: 'INFO',
-        },
-      }).catch(console.error)
+      // Проверяем на специальные маркеры результатов
+      if (output.includes('GENERATION_RESULT:')) {
+        try {
+          const resultJson = output.split('GENERATION_RESULT:')[1].trim()
+          const result = JSON.parse(resultJson)
+          
+          // Обновляем генерацию с результатами
+          await db.generation.update({
+            where: { id },
+            data: {
+              scenario: result.scenario,
+              timing: result.timing.toString(),
+              prompts: JSON.stringify(result.prompts),
+              videoFiles: JSON.stringify(result.video_segments),
+              finalVideo: result.final_video,
+              status: 'COMPLETED'
+            }
+          })
+          
+          await db.generationLog.create({
+            data: {
+              generationId: id,
+              message: 'Все результаты сохранены в базу данных',
+              level: 'INFO',
+            },
+          })
+        } catch (error) {
+          console.error('Error parsing generation result:', error)
+        }
+      } else {
+        // Обычные логи (фильтруем MoviePy progress bars)
+        const cleanOutput = output.trim()
+        if (cleanOutput && !cleanOutput.includes('|') && !cleanOutput.includes('%') && !cleanOutput.includes('it/s')) {
+          await db.generationLog.create({
+            data: {
+              generationId: id,
+              message: cleanOutput,
+              level: 'INFO',
+            },
+          }).catch(console.error)
+        }
+      }
     })
 
     pythonProcess.stderr.on('data', async (data) => {

@@ -409,8 +409,11 @@ class VideoGenerationPipeline:
                 "generate_audio": segment.get("generate_audio", True)
             }
 
-            result = fal_client.run("fal-ai/veo3",
-                                   arguments=fal_params)
+            result = fal_client.subscribe(
+                "fal-ai/veo3",
+                arguments=fal_params,
+                with_logs=True
+            )
             url = self._extract_video_url(result)
             video_urls.append(url)
 
@@ -436,6 +439,16 @@ class VideoGenerationPipeline:
 
     def _extract_video_url(self, fal_result: Any) -> str:
         """Извлечение URL видео из результата fal.ai"""
+        print(f"Fal result structure: {type(fal_result)}")
+        print(f"Fal result content: {fal_result}")
+        
+        # Согласно документации, результат должен содержать video.url
+        if isinstance(fal_result, dict):
+            if 'video' in fal_result and isinstance(fal_result['video'], dict):
+                if 'url' in fal_result['video']:
+                    return fal_result['video']['url']
+        
+        # Fallback: рекурсивный поиск URL
         def search_url(obj):
             if isinstance(obj, str):
                 if obj.startswith("http") and (".mp4" in obj or "fal.media" in obj):
@@ -454,7 +467,7 @@ class VideoGenerationPipeline:
         
         url = search_url(fal_result)
         if not url:
-            raise Exception("Video URL not found in fal.ai response")
+            raise Exception(f"Video URL not found in fal.ai response: {fal_result}")
         return url
 
     def concatenate_videos(self, video_paths: List[str], generation_id: str) -> str:
@@ -549,7 +562,8 @@ def main():
             "final_video": final_video
         }
         
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        # Выводим результат для Node.js API
+        print("GENERATION_RESULT:", json.dumps(result, ensure_ascii=False))
         
     except Exception as e:
         error_result = {

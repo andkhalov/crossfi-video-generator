@@ -68,6 +68,7 @@ export default function GenerationDetailsPage() {
   const [generation, setGeneration] = useState<Generation | null>(null)
   const [loading, setLoading] = useState(true)
   const [starting, setStarting] = useState(false)
+  const [enhancing, setEnhancing] = useState(false)
 
   const loadGeneration = async () => {
     try {
@@ -110,6 +111,35 @@ export default function GenerationDetailsPage() {
       alert('Ошибка соединения')
     } finally {
       setStarting(false)
+    }
+  }
+
+  const enhanceAudio = async () => {
+    setEnhancing(true)
+    try {
+      const response = await fetch(`/api/generations/${params.id}/enhance-audio`, {
+        method: 'POST'
+      })
+      
+      if (response.ok) {
+        await loadGeneration()
+        
+        // Начинаем периодическое обновление
+        const interval = setInterval(async () => {
+          await loadGeneration()
+        }, 3000)
+        
+        // Останавливаем обновление через 10 минут
+        setTimeout(() => clearInterval(interval), 600000)
+      } else {
+        const error = await response.json()
+        alert(error.error || 'Ошибка запуска улучшения звука')
+      }
+    } catch (error) {
+      console.error('Error enhancing audio:', error)
+      alert('Ошибка соединения')
+    } finally {
+      setEnhancing(false)
     }
   }
 
@@ -193,10 +223,46 @@ export default function GenerationDetailsPage() {
               )}
               
               {generation.status === 'COMPLETED' && generation.finalVideo && (
-                <Button variant="outline" className="flex items-center space-x-2">
-                  <Download className="h-4 w-4" />
-                  <span>Скачать видео</span>
-                </Button>
+                <div className="flex space-x-2">
+                  <a href={`/api/generations/${generation.id}/download?type=final`} download>
+                    <Button variant="outline" className="flex items-center space-x-2">
+                      <Download className="h-4 w-4" />
+                      <span>Скачать видео</span>
+                    </Button>
+                  </a>
+                  
+                  {!generation.enhancedVideo && generation.status !== 'ENHANCING_AUDIO' && (
+                    <Button 
+                      variant="secondary" 
+                      className="flex items-center space-x-2"
+                      onClick={enhanceAudio}
+                      disabled={enhancing}
+                    >
+                      <span>🎵</span>
+                      <span>{enhancing ? 'Улучшение...' : 'Улучшить звук'}</span>
+                    </Button>
+                  )}
+                  
+                  {generation.status === 'ENHANCING_AUDIO' && (
+                    <Button 
+                      variant="secondary" 
+                      disabled
+                      className="flex items-center space-x-2"
+                    >
+                      <RefreshCw className="h-4 w-4 animate-spin" />
+                      <span>Улучшение звука...</span>
+                    </Button>
+                  )}
+                  
+                  {generation.enhancedVideo && (
+                    <a href={`/api/generations/${generation.id}/download?type=enhanced`} download>
+                      <Button variant="outline" className="flex items-center space-x-2">
+                        <Download className="h-4 w-4" />
+                        <span>Скачать с улучшенным звуком</span>
+                      </Button>
+                    </a>
+                  )}
+                </div>
               )}
               
               <Button 
@@ -286,11 +352,60 @@ export default function GenerationDetailsPage() {
                                 {prompt.duration} • {prompt.aspect_ratio}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-gray-600 mb-2">
                               {prompt.prompt}
                             </p>
+                            {generation.videoFiles && (
+                              <div className="text-xs text-blue-600">
+                                ✅ Видео сегмент сгенерирован
+                              </div>
+                            )}
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {generation.videoFiles && (
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Видео сегменты</h4>
+                      <div className="space-y-2">
+                        {JSON.parse(generation.videoFiles).map((videoPath: string, index: number) => (
+                          <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                            <span className="text-sm text-gray-700">
+                              Сегмент {index + 1}: {videoPath.split('/').pop()}
+                            </span>
+                            <span className="text-xs text-green-600">✅ Готов</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {generation.finalVideo && (
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Финальное видео</h4>
+                      <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-700">
+                            {generation.finalVideo.split('/').pop()}
+                          </span>
+                          <span className="text-xs text-green-600">✅ Готово</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {generation.enhancedVideo && (
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-2">Видео с улучшенным звуком</h4>
+                      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-700">
+                            {generation.enhancedVideo.split('/').pop()}
+                          </span>
+                          <span className="text-xs text-blue-600">🎵 Звук улучшен</span>
+                        </div>
                       </div>
                     </div>
                   )}
