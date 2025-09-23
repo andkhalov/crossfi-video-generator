@@ -76,13 +76,56 @@ export async function POST(
       const output = data.toString()
       console.log('Python output:', output)
       
-      // Проверяем на специальные маркеры результатов
-      if (output.includes('GENERATION_RESULT:')) {
+      // Проверяем на промежуточные результаты
+      if (output.includes('INTERMEDIATE_RESULT:')) {
+        try {
+          const resultJson = output.split('INTERMEDIATE_RESULT:')[1].trim()
+          const result = JSON.parse(resultJson)
+          
+          // Обновляем генерацию с промежуточными результатами
+          const updateData: any = {}
+          
+          if (result.step === 'scenario') {
+            updateData.scenario = result.scenario
+            updateData.status = 'GENERATING_TIMING'
+          } else if (result.step === 'timing') {
+            updateData.scenario = result.scenario
+            updateData.timing = result.timing.toString()
+            updateData.status = 'GENERATING_PROMPTS'
+          } else if (result.step === 'prompts') {
+            updateData.scenario = result.scenario
+            updateData.timing = result.timing.toString()
+            updateData.prompts = JSON.stringify(result.prompts)
+            updateData.status = 'GENERATING_VIDEOS'
+          } else if (result.step === 'videos') {
+            updateData.scenario = result.scenario
+            updateData.timing = result.timing.toString()
+            updateData.prompts = JSON.stringify(result.prompts)
+            updateData.videoFiles = JSON.stringify(result.video_segments)
+            updateData.status = 'CONCATENATING'
+          }
+          
+          await db.generation.update({
+            where: { id },
+            data: updateData
+          })
+          
+          await db.generationLog.create({
+            data: {
+              generationId: id,
+              message: `Этап "${result.step}" завершен`,
+              level: 'INFO',
+            },
+          })
+        } catch (error) {
+          console.error('Error parsing intermediate result:', error)
+        }
+      } else if (output.includes('GENERATION_RESULT:')) {
         try {
           const resultJson = output.split('GENERATION_RESULT:')[1].trim()
           const result = JSON.parse(resultJson)
           
-          // Обновляем генерацию с результатами
+          // Обновляем генерацию с финальными результатами
           await db.generation.update({
             where: { id },
             data: {
@@ -98,7 +141,7 @@ export async function POST(
           await db.generationLog.create({
             data: {
               generationId: id,
-              message: 'Все результаты сохранены в базу данных',
+              message: 'Генерация полностью завершена',
               level: 'INFO',
             },
           })
@@ -124,13 +167,17 @@ export async function POST(
       const error = data.toString()
       console.error('Python error:', error)
       
-      await db.generationLog.create({
-        data: {
-          generationId: id,
-          message: `Ошибка: ${error.trim()}`,
-          level: 'ERROR',
-        },
-      }).catch(console.error)
+      // Фильтруем MoviePy progress bars из stderr тоже
+      const cleanError = error.trim()
+      if (cleanError && !cleanError.includes('|') && !cleanError.includes('%') && !cleanError.includes('it/s') && !cleanError.includes('chunk:')) {
+        await db.generationLog.create({
+          data: {
+            generationId: id,
+            message: `Ошибка: ${cleanError}`,
+            level: 'ERROR',
+          },
+        }).catch(console.error)
+      }
     })
 
     pythonProcess.on('close', async (code) => {

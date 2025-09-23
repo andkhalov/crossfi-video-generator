@@ -533,19 +533,52 @@ def main():
         scenario = pipeline.generate_scenario(domain_key, product_data, user_input)
         print(f"Сценарий создан: {len(scenario)} символов")
         
+        # Выводим промежуточный результат для интерфейса
+        print("INTERMEDIATE_RESULT:", json.dumps({
+            "step": "scenario",
+            "scenario": scenario
+        }, ensure_ascii=False))
+        
         # Определение тайминга
         print("Определение тайминга...")
         duration, timing_breakdown, framing_context = pipeline.determine_timing(scenario, domain_key)
         print(f"Выбрана длительность: {duration}s")
+        
+        # Выводим промежуточный результат
+        print("INTERMEDIATE_RESULT:", json.dumps({
+            "step": "timing",
+            "scenario": scenario,
+            "timing": duration,
+            "timing_breakdown": timing_breakdown
+        }, ensure_ascii=False))
         
         # Генерация промптов
         print("Генерация промптов для VEO3...")
         prompts = pipeline.generate_veo3_prompts(scenario, duration, timing_breakdown, framing_context, domain_key)
         print(f"Создано {len(prompts)} промптов")
         
+        # Выводим промежуточный результат
+        print("INTERMEDIATE_RESULT:", json.dumps({
+            "step": "prompts",
+            "scenario": scenario,
+            "timing": duration,
+            "timing_breakdown": timing_breakdown,
+            "prompts": prompts
+        }, ensure_ascii=False))
+        
         # Генерация видео
         print("Генерация видео сегментов...")
         video_paths = pipeline.generate_video_segments(prompts, generation_id)
+        
+        # Выводим промежуточный результат после генерации видео
+        print("INTERMEDIATE_RESULT:", json.dumps({
+            "step": "videos",
+            "scenario": scenario,
+            "timing": duration,
+            "timing_breakdown": timing_breakdown,
+            "prompts": prompts,
+            "video_segments": video_paths
+        }, ensure_ascii=False))
         
         # Склейка видео
         print("Склейка финального видео...")

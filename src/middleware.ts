@@ -24,6 +24,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  if (request.nextUrl.pathname.includes('/video-segment') || request.nextUrl.pathname.includes('/download')) {
+    console.log('Video file access, allowing')
+    return NextResponse.next()
+  }
+
   // Проверяем токен авторизации (упрощенная проверка для Edge Runtime)
   const token = request.cookies.get('auth-token')?.value
   console.log('Auth token present:', !!token)

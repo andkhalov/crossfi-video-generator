@@ -146,12 +146,12 @@ export default function GenerationDetailsPage() {
   useEffect(() => {
     loadGeneration()
     
-    // Автообновление для активных генераций
+    // Автообновление для активных генераций - более частое обновление
     const interval = setInterval(() => {
       if (generation && !['COMPLETED', 'FAILED'].includes(generation.status)) {
         loadGeneration()
       }
-    }, 5000)
+    }, 2000) // Обновляем каждые 2 секунды вместо 5
 
     return () => clearInterval(interval)
   }, [params.id, generation?.status])
@@ -322,11 +322,121 @@ export default function GenerationDetailsPage() {
               </CardContent>
             </Card>
 
+            {/* Прогресс генерации */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Прогресс генерации</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {/* Этап 1: Сценарий */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      generation.scenario ? 'bg-green-100 text-green-600' : 
+                      ['GENERATING_SCENARIO'].includes(generation.status) ? 'bg-yellow-100 text-yellow-600' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {generation.scenario ? '✓' : 
+                       ['GENERATING_SCENARIO'].includes(generation.status) ? '⏳' : '1'}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium">Генерация сценария</h4>
+                      <p className="text-sm text-gray-600">
+                        {generation.scenario ? 'Сценарий готов' :
+                         ['GENERATING_SCENARIO'].includes(generation.status) ? 'Создаем сценарий...' :
+                         'Ожидание'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Этап 2: Тайминг */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      generation.timing ? 'bg-green-100 text-green-600' : 
+                      ['GENERATING_TIMING'].includes(generation.status) ? 'bg-yellow-100 text-yellow-600' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {generation.timing ? '✓' : 
+                       ['GENERATING_TIMING'].includes(generation.status) ? '⏳' : '2'}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium">Определение тайминга</h4>
+                      <p className="text-sm text-gray-600">
+                        {generation.timing ? `Длительность: ${generation.timing}s` :
+                         ['GENERATING_TIMING'].includes(generation.status) ? 'Определяем оптимальный тайминг...' :
+                         'Ожидание'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Этап 3: Промпты */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      generation.prompts ? 'bg-green-100 text-green-600' : 
+                      ['GENERATING_PROMPTS'].includes(generation.status) ? 'bg-yellow-100 text-yellow-600' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {generation.prompts ? '✓' : 
+                       ['GENERATING_PROMPTS'].includes(generation.status) ? '⏳' : '3'}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium">Создание промптов</h4>
+                      <p className="text-sm text-gray-600">
+                        {generation.prompts ? `${JSON.parse(generation.prompts).length} промптов готово` :
+                         ['GENERATING_PROMPTS'].includes(generation.status) ? 'Создаем промпты для VEO3...' :
+                         'Ожидание'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Этап 4: Видео */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      generation.videoFiles ? 'bg-green-100 text-green-600' : 
+                      ['GENERATING_VIDEOS'].includes(generation.status) ? 'bg-blue-100 text-blue-600' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {generation.videoFiles ? '✓' : 
+                       ['GENERATING_VIDEOS'].includes(generation.status) ? '🎬' : '4'}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium">Генерация видео</h4>
+                      <p className="text-sm text-gray-600">
+                        {generation.videoFiles ? `${JSON.parse(generation.videoFiles).length} сегментов готово` :
+                         ['GENERATING_VIDEOS'].includes(generation.status) ? 'Генерируем видео через VEO3...' :
+                         'Ожидание'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Этап 5: Склейка */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      generation.finalVideo ? 'bg-green-100 text-green-600' : 
+                      ['CONCATENATING'].includes(generation.status) ? 'bg-purple-100 text-purple-600' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {generation.finalVideo ? '✓' : 
+                       ['CONCATENATING'].includes(generation.status) ? '🎞️' : '5'}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium">Склейка видео</h4>
+                      <p className="text-sm text-gray-600">
+                        {generation.finalVideo ? 'Финальное видео готово' :
+                         ['CONCATENATING'].includes(generation.status) ? 'Склеиваем сегменты...' :
+                         'Ожидание'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Результаты */}
             {(generation.scenario || generation.prompts) && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Результаты генерации</CardTitle>
+                  <CardTitle>Детальные результаты</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {generation.scenario && (
@@ -369,13 +479,35 @@ export default function GenerationDetailsPage() {
                   {generation.videoFiles && (
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Видео сегменты</h4>
-                      <div className="space-y-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {JSON.parse(generation.videoFiles).map((videoPath: string, index: number) => (
-                          <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                            <span className="text-sm text-gray-700">
-                              Сегмент {index + 1}: {videoPath.split('/').pop()}
-                            </span>
-                            <span className="text-xs text-green-600">✅ Готов</span>
+                          <div key={index} className="border rounded-lg p-3">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm font-medium text-gray-700">
+                                Сегмент {index + 1}
+                              </span>
+                              <span className="text-xs text-green-600">✅ Готов</span>
+                            </div>
+                            <video 
+                              controls 
+                              className="w-full rounded border"
+                              style={{ maxHeight: '200px' }}
+                            >
+                              <source src={`/api/generations/${generation.id}/video-segment?index=${index}`} type="video/mp4" />
+                              Ваш браузер не поддерживает видео.
+                            </video>
+                            <div className="mt-2 flex justify-between items-center">
+                              <span className="text-xs text-gray-500">
+                                {videoPath.split('/').pop()}
+                              </span>
+                              <a 
+                                href={`/api/generations/${generation.id}/video-segment?index=${index}&download=true`} 
+                                download
+                                className="text-xs text-blue-600 hover:underline"
+                              >
+                                Скачать
+                              </a>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -385,12 +517,28 @@ export default function GenerationDetailsPage() {
                   {generation.finalVideo && (
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Финальное видео</h4>
-                      <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-700">
+                      <div className="border rounded-lg p-4 bg-green-50">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-sm font-medium text-gray-700">
                             {generation.finalVideo.split('/').pop()}
                           </span>
                           <span className="text-xs text-green-600">✅ Готово</span>
+                        </div>
+                        <video 
+                          controls 
+                          className="w-full rounded border"
+                          style={{ maxHeight: '400px' }}
+                        >
+                          <source src={`/api/generations/${generation.id}/download?type=final`} type="video/mp4" />
+                          Ваш браузер не поддерживает видео.
+                        </video>
+                        <div className="mt-3 flex justify-center">
+                          <a href={`/api/generations/${generation.id}/download?type=final`} download>
+                            <Button variant="outline" className="flex items-center space-x-2">
+                              <Download className="h-4 w-4" />
+                              <span>Скачать финальное видео</span>
+                            </Button>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -399,12 +547,28 @@ export default function GenerationDetailsPage() {
                   {generation.enhancedVideo && (
                     <div>
                       <h4 className="font-medium text-gray-900 mb-2">Видео с улучшенным звуком</h4>
-                      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-700">
+                      <div className="border rounded-lg p-4 bg-blue-50">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-sm font-medium text-gray-700">
                             {generation.enhancedVideo.split('/').pop()}
                           </span>
                           <span className="text-xs text-blue-600">🎵 Звук улучшен</span>
+                        </div>
+                        <video 
+                          controls 
+                          className="w-full rounded border"
+                          style={{ maxHeight: '400px' }}
+                        >
+                          <source src={`/api/generations/${generation.id}/download?type=enhanced`} type="video/mp4" />
+                          Ваш браузер не поддерживает видео.
+                        </video>
+                        <div className="mt-3 flex justify-center">
+                          <a href={`/api/generations/${generation.id}/download?type=enhanced`} download>
+                            <Button variant="outline" className="flex items-center space-x-2">
+                              <Download className="h-4 w-4" />
+                              <span>Скачать улучшенное видео</span>
+                            </Button>
+                          </a>
                         </div>
                       </div>
                     </div>
