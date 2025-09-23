@@ -56,23 +56,22 @@ export async function POST() {
       }
     }
 
-    // Создаем пользователя admin если его нет
-    let adminUser = await db.user.findUnique({
+    // Получаем пользователя и его текущий профиль
+    const adminUser = await db.user.findUnique({
       where: { username: 'LoreCore' }
     })
 
-    if (!adminUser) {
-      adminUser = await db.user.create({
-        data: {
-          id: 'admin',
-          username: 'LoreCore',
-          password: 'hashed_password', // В реальном приложении нужно хешировать
-        }
-      })
+    if (!adminUser || !adminUser.currentClientProfileId) {
+      return NextResponse.json(
+        { error: 'Пользователь не найден или не выбран профиль клиента' },
+        { status: 400 }
+      )
     }
 
-    // Удаляем существующие продукты
-    await db.product.deleteMany()
+    // Удаляем существующие продукты для этого клиента
+    await db.product.deleteMany({
+      where: { clientProfileId: adminUser.currentClientProfileId }
+    })
 
     // Добавляем продукты из файла
     const products = productsData.crossfi_ecosystem_products.products
@@ -87,6 +86,7 @@ export async function POST() {
           data: JSON.stringify(productData),
           archived: false,
           userId: adminUser.id,
+          clientProfileId: adminUser.currentClientProfileId,
         }
       })
       createdProducts.push(product)

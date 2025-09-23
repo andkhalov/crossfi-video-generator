@@ -52,18 +52,52 @@ export async function POST(
       },
     })
 
-    // Запускаем Python скрипт асинхронно
-    const pythonScript = path.join(process.cwd(), 'python', 'video_generator.py')
+    // Подготавливаем данные для Python скрипта
+    const pythonScript = path.join(process.cwd(), 'python', 'video_generator_v2.py')
     const domainKey = generation.domains[0]?.domain.key || 'metamask_fox'
     const productData = JSON.parse(generation.product.data)
     
+    // Получаем данные домена из базы
+    const domainData = generation.domains[0]?.domain ? JSON.parse(generation.domains[0].domain.data) : {}
+    
+    // Получаем профиль клиента
+    const clientProfile = await db.clientProfile.findUnique({
+      where: { id: generation.clientProfileId }
+    })
+    
+    if (!clientProfile) {
+      return NextResponse.json(
+        { error: 'Профиль клиента не найден' },
+        { status: 404 }
+      )
+    }
+
+    // Подготавливаем полные данные для скрипта
+    const generationData = {
+      domainKey,
+      domainData,
+      productData,
+      clientProfile: {
+        companyName: clientProfile.companyName,
+        industry: clientProfile.industry,
+        positioning: clientProfile.positioning,
+        targetAudience: JSON.parse(clientProfile.targetAudience),
+        brandValues: JSON.parse(clientProfile.brandValues),
+        contentStrategy: clientProfile.contentStrategy,
+        toneOfVoice: clientProfile.toneOfVoice,
+        stylePreferences: JSON.parse(clientProfile.stylePreferences),
+        mainProducts: JSON.parse(clientProfile.mainProducts),
+        competitiveAdvantages: JSON.parse(clientProfile.competitiveAdvantages),
+        uniqueFeatures: JSON.parse(clientProfile.uniqueFeatures)
+      },
+      generationId: generation.id,
+      userInput: generation.userInput || '',
+      language: generation.language || 'Portuguese'
+    }
+    
     const pythonProcess = spawn('/Users/andreykhalov/anaconda3/bin/python3', [
       pythonScript,
-      domainKey,
-      JSON.stringify(productData),
-      generation.id,
-      generation.userInput || '',
-      generation.language || 'Portuguese'
+      JSON.stringify(generationData)
     ], {
       env: {
         ...process.env,
@@ -99,22 +133,22 @@ export async function POST(
             console.log('Scenario saved, length:', result.scenario.length)
           } else if (result.step === 'timing') {
             updateData.scenario = result.scenario
-            updateData.timing = result.timing.toString()
+            updateData.timing = result.timing ? result.timing.toString() : null
             updateData.status = 'GENERATING_PROMPTS'
             console.log('Timing saved:', result.timing)
           } else if (result.step === 'prompts') {
             updateData.scenario = result.scenario
-            updateData.timing = result.timing.toString()
-            updateData.prompts = JSON.stringify(result.prompts)
+            updateData.timing = result.timing ? result.timing.toString() : null
+            updateData.prompts = result.prompts ? JSON.stringify(result.prompts) : null
             updateData.status = 'GENERATING_VIDEOS'
-            console.log('Prompts saved, count:', result.prompts.length)
+            console.log('Prompts saved, count:', result.prompts ? result.prompts.length : 0)
           } else if (result.step === 'videos') {
             updateData.scenario = result.scenario
-            updateData.timing = result.timing.toString()
-            updateData.prompts = JSON.stringify(result.prompts)
-            updateData.videoFiles = JSON.stringify(result.video_segments)
+            updateData.timing = result.timing ? result.timing.toString() : null
+            updateData.prompts = result.prompts ? JSON.stringify(result.prompts) : null
+            updateData.videoFiles = result.video_segments ? JSON.stringify(result.video_segments) : null
             updateData.status = 'CONCATENATING'
-            console.log('Video segments saved, count:', result.video_segments.length)
+            console.log('Video segments saved, count:', result.video_segments ? result.video_segments.length : 0)
           }
           
           console.log(`Updating generation with step: ${result.step}`, updateData)
@@ -146,10 +180,10 @@ export async function POST(
             where: { id },
             data: {
               scenario: result.scenario,
-              timing: result.timing.toString(),
-              prompts: JSON.stringify(result.prompts),
-              videoFiles: JSON.stringify(result.video_segments),
-              finalVideo: result.final_video,
+              timing: result.timing ? result.timing.toString() : null,
+              prompts: result.prompts ? JSON.stringify(result.prompts) : null,
+              videoFiles: result.video_segments ? JSON.stringify(result.video_segments) : null,
+              finalVideo: result.final_video || null,
               status: 'COMPLETED'
             }
           })

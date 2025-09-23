@@ -43,6 +43,7 @@ const statusConfig = {
 export default function HomePage() {
   const [generations, setGenerations] = useState<Generation[]>([])
   const [loading, setLoading] = useState(true)
+  const [checkingProfile, setCheckingProfile] = useState(true)
 
   const loadGenerations = async () => {
     try {
@@ -59,22 +60,43 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+    checkUserProfile()
+  }, [])
+
+  const checkUserProfile = async () => {
+    try {
+      const response = await fetch('/api/user/current')
+      if (response.ok) {
+        const userData = await response.json()
+        if (userData.needsProfileSelection) {
+          // Перенаправляем на выбор профиля
+          window.location.href = '/client-profile'
+          return
+        }
+      }
+    } catch (error) {
+      console.error('Error checking user profile:', error)
+    } finally {
+      setCheckingProfile(false)
+    }
+    
+    // Загружаем генерации только если профиль выбран
     loadGenerations()
     
-    // Автообновление каждые 5 секунд (чаще для лучшего UX)
+    // Автообновление каждые 5 секунд
     const interval = setInterval(() => {
       console.log('Auto-refreshing generations list...')
       loadGenerations()
     }, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }
 
-  if (loading) {
+  if (checkingProfile || loading) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <main className="max-w-7xl mx-auto py-6 px-4">
-          <div>Загрузка...</div>
+          <div>{checkingProfile ? 'Проверка профиля...' : 'Загрузка...'}</div>
         </main>
       </div>
     )

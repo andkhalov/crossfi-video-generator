@@ -48,23 +48,22 @@ export async function POST() {
       }
     }
 
-    // Создаем пользователя admin если его нет
-    let adminUser = await db.user.findUnique({
+    // Получаем пользователя и его текущий профиль
+    const adminUser = await db.user.findUnique({
       where: { username: 'LoreCore' }
     })
 
-    if (!adminUser) {
-      adminUser = await db.user.create({
-        data: {
-          id: 'admin',
-          username: 'LoreCore',
-          password: 'hashed_password',
-        }
-      })
+    if (!adminUser || !adminUser.currentClientProfileId) {
+      return NextResponse.json(
+        { error: 'Пользователь не найден или не выбран профиль клиента' },
+        { status: 400 }
+      )
     }
 
-    // Удаляем существующие домены
-    await db.domain.deleteMany()
+    // Удаляем существующие домены для этого клиента
+    await db.domain.deleteMany({
+      where: { clientProfileId: adminUser.currentClientProfileId }
+    })
 
     // Добавляем домены из файла
     const domains = domainsData.domains
@@ -79,6 +78,7 @@ export async function POST() {
           data: JSON.stringify(domainData),
           archived: false,
           userId: adminUser.id,
+          clientProfileId: adminUser.currentClientProfileId,
         }
       })
       createdDomains.push(domain)

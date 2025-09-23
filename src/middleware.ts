@@ -24,6 +24,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  if (request.nextUrl.pathname === '/client-profile' || request.nextUrl.pathname.startsWith('/client-profile/')) {
+    console.log('Client profile page, allowing access')
+    return NextResponse.next()
+  }
+
+  if (request.nextUrl.pathname.startsWith('/api/client-profiles')) {
+    console.log('Client profiles API, allowing access')
+    return NextResponse.next()
+  }
+
   if (request.nextUrl.pathname.includes('/video-segment') || request.nextUrl.pathname.includes('/download')) {
     console.log('Video file access, allowing')
     return NextResponse.next()

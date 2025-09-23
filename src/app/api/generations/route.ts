@@ -3,7 +3,19 @@ import { db } from '@/lib/db'
 
 export async function GET() {
   try {
+    // Получаем текущий профиль пользователя
+    const user = await db.user.findUnique({
+      where: { username: 'LoreCore' }
+    })
+
+    if (!user || !user.currentClientProfileId) {
+      return NextResponse.json([]) // Возвращаем пустой массив если профиль не выбран
+    }
+
     const generations = await db.generation.findMany({
+      where: {
+        clientProfileId: user.currentClientProfileId
+      },
       include: {
         product: true,
         domains: {
@@ -33,6 +45,18 @@ export async function POST(request: NextRequest) {
   try {
     const { name, productId, domainIds, language, userInput } = await request.json()
 
+    // Получаем текущий профиль пользователя
+    const user = await db.user.findUnique({
+      where: { username: 'LoreCore' }
+    })
+
+    if (!user || !user.currentClientProfileId) {
+      return NextResponse.json(
+        { error: 'Профиль клиента не выбран' },
+        { status: 400 }
+      )
+    }
+
     // Создаем генерацию
     const generation = await db.generation.create({
       data: {
@@ -41,7 +65,8 @@ export async function POST(request: NextRequest) {
         language: language || 'Portuguese',
         userInput: userInput || null,
         status: 'CREATED',
-        userId: 'admin',
+        userId: user.id,
+        clientProfileId: user.currentClientProfileId,
       },
     })
 

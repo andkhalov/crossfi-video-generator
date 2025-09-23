@@ -3,8 +3,20 @@ import { db } from '@/lib/db'
 
 export async function GET() {
   try {
+    // Получаем текущий профиль пользователя
+    const user = await db.user.findUnique({
+      where: { username: 'LoreCore' }
+    })
+
+    if (!user || !user.currentClientProfileId) {
+      return NextResponse.json([]) // Возвращаем пустой массив если профиль не выбран
+    }
+
     const domains = await db.domain.findMany({
-      where: { archived: false },
+      where: { 
+        archived: false,
+        clientProfileId: user.currentClientProfileId
+      },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -22,6 +34,18 @@ export async function POST(request: NextRequest) {
   try {
     const { key, title, concept, data } = await request.json()
 
+    // Получаем текущий профиль пользователя
+    const user = await db.user.findUnique({
+      where: { username: 'LoreCore' }
+    })
+
+    if (!user || !user.currentClientProfileId) {
+      return NextResponse.json(
+        { error: 'Профиль клиента не выбран' },
+        { status: 400 }
+      )
+    }
+
     const domain = await db.domain.create({
       data: {
         key,
@@ -29,7 +53,8 @@ export async function POST(request: NextRequest) {
         concept,
         data: JSON.stringify(data),
         archived: false,
-        userId: 'admin',
+        userId: user.id,
+        clientProfileId: user.currentClientProfileId,
       },
     })
 

@@ -14,14 +14,59 @@ model User {
   id        String   @id @default(cuid())
   username  String   @unique
   password  String
+  currentClientProfileId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  clientProfiles ClientProfile[]
+  currentClientProfile ClientProfile? @relation("CurrentClientProfile", fields: [currentClientProfileId], references: [id])
+  
+  // Обратные связи
   generations Generation[]
   products    Product[]
   domains     Domain[]
 
   @@map("users")
+}
+
+model ClientProfile {
+  id          String   @id @default(cuid())
+  
+  // Основная информация о клиенте
+  companyName String
+  industry    String
+  positioning String   // Позиционирование бренда
+  
+  // Целевая аудитория и ценности
+  targetAudience String // JSON array of target groups
+  brandValues   String  // JSON array of brand values
+  
+  // Контентная стратегия
+  contentStrategy String // viral, professional, educational, technical
+  toneOfVoice    String  // friendly, professional, authoritative, playful
+  stylePreferences String // JSON object with style preferences
+  
+  // Продуктовая информация
+  mainProducts   String  // JSON array of main products/services
+  competitiveAdvantages String // JSON array of advantages
+  uniqueFeatures String  // JSON array of unique features
+  
+  // Системные поля
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Связи
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Обратные связи
+  currentUsers User[] @relation("CurrentClientProfile")
+  generations Generation[]
+  products    Product[]
+  domains     Domain[]
+
+  @@map("client_profiles")
 }
 
 model Product {
@@ -36,6 +81,9 @@ model Product {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  clientProfileId String
+  clientProfile   ClientProfile @relation(fields: [clientProfileId], references: [id], onDelete: Cascade)
 
   generations Generation[]
 
@@ -44,7 +92,7 @@ model Product {
 
 model Domain {
   id          String   @id @default(cuid())
-  key         String   @unique
+  key         String   // Убираем unique, так как теперь уникальность в рамках клиента
   title       String
   concept     String
   data        String   // JSON string with full domain data
@@ -54,9 +102,13 @@ model Domain {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  clientProfileId String
+  clientProfile   ClientProfile @relation(fields: [clientProfileId], references: [id], onDelete: Cascade)
 
   generationDomains GenerationDomain[]
 
+  @@unique([key, clientProfileId]) // Уникальность ключа в рамках клиента
   @@map("domains")
 }
 
@@ -79,6 +131,9 @@ model Generation {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   productId String
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  clientProfileId String
+  clientProfile   ClientProfile @relation(fields: [clientProfileId], references: [id], onDelete: Cascade)
 
   domains GenerationDomain[]
   logs    GenerationLog[]
