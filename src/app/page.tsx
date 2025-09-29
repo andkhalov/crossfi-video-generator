@@ -65,11 +65,16 @@ export default function HomePage() {
 
   const checkUserProfile = async () => {
     try {
+      console.log('Checking user profile...')
       const response = await fetch('/api/user/current')
+      console.log('User profile response:', response.status)
+      
       if (response.ok) {
         const userData = await response.json()
+        console.log('User data:', userData)
+        
         if (userData.needsProfileSelection) {
-          // Перенаправляем на выбор профиля
+          console.log('Profile selection needed, redirecting...')
           window.location.href = '/client-profile'
           return
         }

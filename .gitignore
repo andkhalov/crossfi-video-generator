@@ -45,3 +45,27 @@ ready_video/
 *.mp4
 *.mov
 *.avi
+*.mkv
+*.webm
+
+# Database files
+prisma/dev.db
+prisma/dev.db-journal
+*.db
+*.db-journal
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+temp/
+tmp/
+temp-audio.m4a

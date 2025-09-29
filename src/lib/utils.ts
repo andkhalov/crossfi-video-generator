@@ -14,3 +14,5 @@ export function formatDate(date: Date) {
     minute: '2-digit',
   }).format(date)
 }
+
+

@@ -46,3 +46,5 @@ npm start' > /app/start.sh && chmod +x /app/start.sh
 
 # Запускаем приложение
 CMD ["/app/start.sh"]
+
+

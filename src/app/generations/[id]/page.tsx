@@ -72,20 +72,30 @@ export default function GenerationDetailsPage() {
 
   const loadGeneration = async () => {
     try {
+      console.log('Loading generation data...')
+      const startTime = Date.now()
       const response = await fetch(`/api/generations/${params.id}`)
+      const loadTime = Date.now() - startTime
+      console.log(`Generation API response time: ${loadTime}ms, status: ${response.status}`)
+      
       if (response.ok) {
         const data = await response.json()
         console.log('Generation data loaded:', {
           id: data.id,
           status: data.status,
           hasScenario: !!data.scenario,
+          scenarioLength: data.scenario ? data.scenario.length : 0,
           hasTiming: !!data.timing,
           hasPrompts: !!data.prompts,
+          promptsCount: data.prompts ? JSON.parse(data.prompts).length : 0,
           hasVideoFiles: !!data.videoFiles,
+          videoFilesCount: data.videoFiles ? JSON.parse(data.videoFiles).length : 0,
           hasFinalVideo: !!data.finalVideo
         })
         setGeneration(data)
         return data
+      } else {
+        console.error('Failed to load generation:', response.status)
       }
     } catch (error) {
       console.error('Error loading generation:', error)
@@ -163,6 +173,7 @@ export default function GenerationDetailsPage() {
         const response = await fetch(`/api/generations/${params.id}/status`)
         if (response.ok) {
           const statusData = await response.json()
+          console.log('Status check:', statusData)
           
           // Если статус изменился или появились новые данные, загружаем полные данные
           if (!generation || 
@@ -172,19 +183,25 @@ export default function GenerationDetailsPage() {
               statusData.hasVideoFiles !== !!generation.videoFiles ||
               statusData.hasFinalVideo !== !!generation.finalVideo) {
             
-            console.log('Status changed, reloading full data...')
+            console.log('Status changed, reloading full data...', {
+              oldStatus: generation?.status,
+              newStatus: statusData.status,
+              scenarioChanged: statusData.hasScenario !== !!generation?.scenario,
+              promptsChanged: statusData.hasPrompts !== !!generation?.prompts
+            })
             await loadGeneration()
           }
           
           // Останавливаем обновление если генерация завершена
           if (['COMPLETED', 'FAILED'].includes(statusData.status)) {
+            console.log('Generation finished, stopping status updates')
             clearInterval(statusInterval)
           }
         }
       } catch (error) {
         console.error('Error checking status:', error)
       }
-    }, 1000) // Проверяем статус каждую секунду
+    }, 2000) // Увеличиваем интервал до 2 секунд
 
     return () => clearInterval(statusInterval)
   }, [params.id, generation?.status])
