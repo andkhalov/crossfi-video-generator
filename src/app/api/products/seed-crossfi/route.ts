@@ -7,7 +7,7 @@ export async function POST() {
   try {
     // Получаем пользователя
     const adminUser = await db.user.findUnique({
-      where: { username: 'LoreCore' }
+      where: { username: 'CrossFi' }
     })
 
     if (!adminUser) {

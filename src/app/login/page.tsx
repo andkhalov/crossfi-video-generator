@@ -89,10 +89,6 @@ export default function LoginPage() {
               {loading ? 'Вход...' : 'Войти'}
             </Button>
           </form>
-          <div className="mt-4 text-xs text-gray-500 text-center">
-            Логин: LoreCore<br />
-            Пароль: lorecore_2025
-          </div>
         </CardContent>
       </Card>
     </div>

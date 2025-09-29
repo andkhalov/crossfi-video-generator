@@ -5,7 +5,7 @@ export async function GET() {
   try {
     // Получаем текущий профиль пользователя
     const user = await db.user.findUnique({
-      where: { username: 'LoreCore' }
+      where: { username: 'CrossFi' }
     })
 
     if (!user || !user.currentClientProfileId) {
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 
     // Получаем текущий профиль пользователя
     const user = await db.user.findUnique({
-      where: { username: 'LoreCore' }
+      where: { username: 'CrossFi' }
     })
 
     if (!user || !user.currentClientProfileId) {

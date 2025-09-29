@@ -9,17 +9,17 @@ export async function POST(request: NextRequest) {
     console.log('Login attempt:', { username, password: '***' })
 
     // Проверяем фиксированные креды
-    if (username === 'LoreCore' && password === 'lorecore_2025') {
+    if (username === 'CrossFi' && password === 'crossfi_2025') {
       // Создаем или находим пользователя
       let user = await db.user.findUnique({
-        where: { username: 'LoreCore' }
+        where: { username: 'CrossFi' }
       })
 
       if (!user) {
         user = await db.user.create({
           data: {
             id: 'admin',
-            username: 'LoreCore',
+            username: 'CrossFi',
             password: 'hashed_password',
           }
         })

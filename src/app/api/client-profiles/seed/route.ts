@@ -5,14 +5,14 @@ export async function POST() {
   try {
     // Создаем пользователя admin если его нет
     let adminUser = await db.user.findUnique({
-      where: { username: 'LoreCore' }
+      where: { username: 'CrossFi' }
     })
 
     if (!adminUser) {
       adminUser = await db.user.create({
         data: {
           id: 'admin',
-          username: 'LoreCore',
+          username: 'CrossFi',
           password: 'hashed_password',
         }
       })

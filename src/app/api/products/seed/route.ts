@@ -58,7 +58,7 @@ export async function POST() {
 
     // Получаем пользователя и его текущий профиль
     const adminUser = await db.user.findUnique({
-      where: { username: 'LoreCore' }
+      where: { username: 'CrossFi' }
     })
 
     if (!adminUser || !adminUser.currentClientProfileId) {
