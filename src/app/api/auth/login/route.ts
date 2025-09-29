@@ -10,9 +10,9 @@ export async function POST(request: NextRequest) {
 
     // Проверяем фиксированные креды
     if (username === 'CrossFi' && password === 'crossfi_2025') {
-      // Создаем или находим пользователя
+      // Создаем или обновляем пользователя
       let user = await db.user.findUnique({
-        where: { username: 'CrossFi' }
+        where: { id: 'admin' }
       })
 
       if (!user) {
@@ -24,6 +24,15 @@ export async function POST(request: NextRequest) {
           }
         })
         console.log('Created admin user')
+      } else {
+        // Обновляем username если он изменился
+        if (user.username !== 'CrossFi') {
+          user = await db.user.update({
+            where: { id: 'admin' },
+            data: { username: 'CrossFi' }
+          })
+          console.log('Updated admin user username')
+        }
       }
 
       const token = jwt.sign(

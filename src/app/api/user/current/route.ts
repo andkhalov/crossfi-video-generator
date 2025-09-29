@@ -4,7 +4,7 @@ import { db } from '@/lib/db'
 export async function GET() {
   try {
     const user = await db.user.findUnique({
-      where: { username: 'CrossFi' },
+      where: { id: 'admin' },
       include: { 
         clientProfiles: true
       }

@@ -5,7 +5,7 @@ export async function POST() {
   try {
     // Создаем пользователя admin если его нет
     let adminUser = await db.user.findUnique({
-      where: { username: 'CrossFi' }
+      where: { id: 'admin' }
     })
 
     if (!adminUser) {

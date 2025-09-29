@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     // Обновляем текущий профиль пользователя
     await db.user.update({
-      where: { username: 'CrossFi' },
+      where: { id: 'admin' },
       data: { currentClientProfileId: profileId }
     })
 
